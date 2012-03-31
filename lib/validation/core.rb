@@ -1,8 +1,5 @@
-# Copyright (C) 2012  Kenichi Kamiya
+# Copyright (C) 2011-2012  Kenichi Kamiya
 # 
-# Code base from Striuct
-#   http://rubygems.org/gems/striuct
-
 # @author Kenichi Kamiya
 # @example overview
 #   class Person

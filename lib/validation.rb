@@ -1,6 +1,7 @@
-# Copyright (C) 2012  Kenichi Kamiya
-# 
+# Copyright (C) 2011-2012  Kenichi Kamiya
+
 # Code base from Striuct
+#   http://github.com/kachick/striuct
 #   http://rubygems.org/gems/striuct
 
 require_relative 'validation/core'

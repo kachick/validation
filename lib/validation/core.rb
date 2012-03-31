@@ -19,8 +19,8 @@ module Validation
       mod.module_eval do
         extend ::Validation::Condition::Builders
         extend ::Validation::Condition::Patterns
-        extend ::Validation::Adjuster::Builders
-        extend ::Validation::Adjuster::Patterns
+        extend ::Validation::Adjustment::Builders
+        extend ::Validation::Adjustment::Patterns
         extend ::Validation::Validatable::Eigen
         include ::Validation::Validatable
       end

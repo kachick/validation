@@ -9,7 +9,7 @@ module Validation
         nil
       end
 
-      def attr_accssor_with_validation(var, validator, options, &adjuster)
+      def attr_accessor_with_validation(var, validator, options, &adjuster)
         attr_reader :var
         attr_writer_with_validation var, validator, options, &adjuster
         nil

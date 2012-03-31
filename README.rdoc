@@ -1,0 +1,40 @@
+= Validation
+
+* http://github.com/kachick/validation
+* http://rubygems.org/gems/validation
+* http://rubyforge.org/projects/validation
+
+== Description
+
+A way of basic validation.
+
+== Features
+
+* Easy and Flexible Validations
+* Hook just before running setters
+* Pure Ruby :)
+
+== Usage
+
+* setup
+    require 'validation'
+
+* (writing...)
+
+== Requirements
+
+* Ruby 1.9.2 or later
+  
+  tested release versions
+    * 1.9.3-p125
+    * 1.9.2-p290
+
+== Installation
+
+* gem install validation
+
+== License
+
+Copyright (C) 2011-2012  Kenichi Kamiya
+
+The MIT License (See the file LICENSE)

@@ -1,0 +1,13 @@
+History.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+lib/validation.rb
+lib/validation/core.rb
+lib/validation/condition.rb
+lib/validation/adjuster.rb
+lib/validation/validatable.rb
+lib/validation/version.rb
+test/test_helper.rb
+test/test_validation.rb
+example/example.rb

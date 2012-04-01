@@ -18,7 +18,7 @@ module Validation
     
       ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
       METHOD_OPTIONS = [:arg, :args, :ret, :doc].freeze
-      
+
       def attr_reader_with_validation(name, condition)
         define_method name do
           value = instance_variable_get :"@#{name}"
@@ -86,6 +86,45 @@ module Validation
         :attr_accessor_with_validation,
         :attr_validator
       )
+
+
+=begin
+      DEFAULT_METHOD_OPTIONS = {arg: ANYTHING?, ret: ANYTHING?}.freeze
+      # @example
+      #   method :symbolize, arg: String, ret: Symbol, doc: 'a string to a symbol' do |arg|
+      #     arg.to_sym
+      #   end
+      def method(name, options={}, &block)
+        options = DEFAULT_METHOD_OPTIONS.merge options
+        params = block.parameters.zip
+        p params
+        
+        line_number = __LINE__; code = %{
+          def #{name}(#{params.req.join(', ')})
+            arg_condition = options[:arg]
+              _valid? arg_condition
+            else
+              raise
+            end
+          end
+        }
+        
+        if options
+          unless (options.keys - METHOD_OPTIONS).empty?
+            raise ArgumentError, 'invalid option parameter is'
+          end
+          
+          define_method name do
+            if arg_condition = options[:arg]
+              _valid? arg_condition, 
+            end
+          end
+        else
+          define_method name, &block
+        end
+      end
+=end
+
     end
 
     private

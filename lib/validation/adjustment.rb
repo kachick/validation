@@ -29,7 +29,7 @@ module Validation
         raise TypeError, 'wrong object for condition' unless conditionable? condition
         raise TypeError, 'wrong object for adjuster' unless adjustable? adjuster
         
-        ->v{pass?(v, condition) ? adjuster.call(v) : v}
+        ->v{_valid?(condition, v) ? adjuster.call(v) : v}
       end
       
       # Sequencial apply all adjusters.

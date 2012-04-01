@@ -9,12 +9,12 @@ module Validation
   #     attr_validator :name, AND(String, /\A\w+(?: \w+)*\z/), &:strip
   #     attr_validator :birthday, Time
   module Validatable
+    class InvalidReadingError < InvalidError; end
+    class InvalidWritingError < InvalidError; end
+    class InvalidAdjustingError < InvalidError; end
+  
     module Eigen
       extend Condition::Patterns
-      
-      class InvalidReadingError < InvalidError; end
-      class InvalidWritingError < InvalidError; end
-      class InvalidAdjustingError < InvalidError; end
     
       ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
       METHOD_OPTIONS = [:arg, :args, :ret, :doc].freeze
@@ -48,14 +48,14 @@ module Validation
             begin
               value = instance_exec value, &adjuster
             rescue Exception
-              raise InvalidAdjustingError
+              raise InvalidAdjustingError, $!
             end
           end
           
           if _valid? condition, value
             instance_variable_set :"@#{name}", value
           else
-            raise InvalidReadingError,
+            raise InvalidWritingError,
               "#{value.inspect} is deficient for #{name} in #{self.class}"
           end
         end

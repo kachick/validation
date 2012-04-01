@@ -8,4 +8,6 @@ lib/validation/condition.rb
 lib/validation/adjustment.rb
 lib/validation/validatable.rb
 lib/validation/version.rb
+test/test_helper.rb
+test/test_validation.rb
 data/example.rb

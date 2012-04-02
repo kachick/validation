@@ -8,14 +8,8 @@ module Validation
   #     include Validation
   #     attr_validator :name, AND(String, /\A\w+(?: \w+)*\z/), &:strip
   #     attr_validator :birthday, Time
-  module Validatable
-    class InvalidReadingError < InvalidError; end
-    class InvalidWritingError < InvalidError; end
-    class InvalidAdjustingError < InvalidError; end
-  
+  module Validatable 
     module Eigen
-      extend Condition::Patterns
-    
       ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
       METHOD_OPTIONS = [:arg, :args, :ret, :doc].freeze
       
@@ -94,7 +88,7 @@ module Validation
     # @param [Object] value
     def _valid?(condition, value)
       case condition
-      when ::Validation::Condition::Patterns::ANYTHING
+      when ::Validation::Condition::ANYTHING
         true
       when Proc
         instance_exec value, &condition

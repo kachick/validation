@@ -17,7 +17,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
     sth.lank = 2
     assert_equal 2, sth.lank
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.lank = 31
     end
   end
@@ -33,7 +33,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
     sth.lank = 8
     assert_equal 8, sth.lank
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.lank = 2
     end
   end
@@ -49,7 +49,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
     sth.lank = 8
     assert_equal 8, sth.lank
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.lank = 6
     end
   end
@@ -81,7 +81,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     sth.not_integer = obj
     assert_same obj, sth.not_integer
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.not_integer = 1
     end
   end
@@ -99,7 +99,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
       undef_method :class
     end
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.no_exception = obj
     end
   end
@@ -118,7 +118,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
       end
     end
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.catch_name_error = obj
     end
   end
@@ -126,7 +126,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   def test_or
     sth = Sth.new
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.all_pass = 11
     end
     
@@ -140,11 +140,11 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   def test_and
     sth = Sth.new
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.has_ignore = 1
     end
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.has_ignore = 2
     end
   
@@ -152,7 +152,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     assert_equal 3, sth.has_ignore
     #~ assert_equal true, sth.valid?(:has_ignore)
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.has_ignore = []
     end
   end
@@ -160,11 +160,11 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   def test_nand
     sth = Sth.new
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.nand = 4
     end
 
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.nand = 4.5
     end
   
@@ -178,7 +178,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   def test_member_of
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.one_of_member = 4
     end
   
@@ -190,7 +190,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   def test_generics
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.list_only_int = [1, '2']
     end
   
@@ -207,7 +207,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   def test_boolean
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.true_or_false = nil
     end
     
@@ -225,7 +225,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     sth = Sth.new
     obj = Object.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.like_str = obj
     end
   
@@ -247,7 +247,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     sth = Sth.new
     obj = Object.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.has_x = obj
     end
     
@@ -265,7 +265,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     sth = Sth.new
     obj = Object.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.has_x_and_y = obj
     end
     
@@ -274,7 +274,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
       end
     end
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.has_x_and_y = obj
     end
     
@@ -300,7 +300,7 @@ class TestGetterValidation < Test::Unit::TestCase
   def test_writer_validation
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.plus_getter = ''
     end
     
@@ -308,13 +308,13 @@ class TestGetterValidation < Test::Unit::TestCase
     assert_equal 'abc', sth.plus_getter
     sth.plus_getter.clear
     
-    assert_raises Validation::Validatable::InvalidReadingError do
+    assert_raises Validation::InvalidReadingError do
       sth.plus_getter
     end
     
     sth.only_getter = ''
     
-    assert_raises Validation::Validatable::InvalidReadingError do
+    assert_raises Validation::InvalidReadingError do
       sth.only_getter
     end
   end
@@ -338,7 +338,7 @@ class TestValidationAdjustmentOld < Test::Unit::TestCase
     @sth.age = 10.0
     assert_same 10, @sth.age
 
-    assert_raises Validation::Validatable::InvalidAdjustingError do
+    assert_raises Validation::InvalidAdjustingError do
       @sth.age = '10.0'
     end
     
@@ -368,11 +368,11 @@ class TestValidationAdjustment < Test::Unit::TestCase
   def test_WHEN
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidWritingError do
+    assert_raises Validation::InvalidWritingError do
       sth.chomped = :"a\n"
     end
     
-    assert_raises Validation::Validatable::InvalidAdjustingError do
+    assert_raises Validation::InvalidAdjustingError do
       sth.chomped = 'a'
     end
 
@@ -387,7 +387,7 @@ class TestValidationAdjustment < Test::Unit::TestCase
   def test_REDUCE
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidAdjustingError do
+    assert_raises Validation::InvalidAdjustingError do
       sth.no_reduced = 1
     end
     
@@ -399,7 +399,7 @@ class TestValidationAdjustment < Test::Unit::TestCase
   def test_PARSE
     sth = Sth.new
     
-    assert_raises Validation::Validatable::InvalidAdjustingError do
+    assert_raises Validation::InvalidAdjustingError do
       sth.integer = '1.0'
     end
     
@@ -407,7 +407,7 @@ class TestValidationAdjustment < Test::Unit::TestCase
     
     assert_equal 1, sth.integer
     
-    assert_raises Validation::Validatable::InvalidAdjustingError do
+    assert_raises Validation::InvalidAdjustingError do
       sth.myobj = '1'
     end
     

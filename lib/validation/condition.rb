@@ -143,15 +143,16 @@ module Validation
     # A condition builder.
     # @return [lambda]
     #   this lambda return true
-    #   if catch a kindly exception when a argment checking in a block parameter
-    def CATCH(exception=Exception, &condition)
+    #   if catch any kindly exceptions when a argment checking in a block parameter
+    def RESCUE(_exception, *exceptions, &condition)
+      exceptions = [_exception, *exceptions]
       raise ArgumentError unless conditionable? condition
-      raise TypeError unless exception.ancestors.include? Exception
+      raise TypeError unless exceptions.all?{|e|e.ancestors.include? Exception}
       
       ->v{
         begin
           _valid? condition, v
-        rescue exception
+        rescue *exceptions
           true
         rescue Exception
           false
@@ -160,10 +161,26 @@ module Validation
         end
       }
     end
-    
-    alias_method :RESCUE, :CATCH
-    module_function :RESCUE
-    
+
+    # A condition builder.
+    # @return [lambda]
+    #   this lambda return true
+    #   if catch a specific exception when a argment checking in a block parameter
+    def CATCH(exception, &condition)
+      raise ArgumentError unless conditionable? condition
+      raise TypeError, 'not error object' unless exception.ancestors.include? Exception
+      
+      ->v{
+        begin
+          _valid? condition, v
+        rescue Exception
+          $!.class.equal? exception
+        else
+          false
+        end
+      }
+    end
+
     # A condition builder.
     # @return [lambda]
     #   this lambda return true

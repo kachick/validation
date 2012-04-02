@@ -68,7 +68,8 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     attr_validator :has_ignore, AND(1..5, 3..10)
     attr_validator :nand, NAND(1..5, 3..10)
     attr_validator :all_pass, OR(1..5, 3..10)
-    attr_validator :catch_name_error, CATCH(NameError){|v|v.no_name!}
+    attr_validator :catch_error, CATCH(NoMethodError){|v|v.no_name!}
+    attr_validator :rescue_error, RESCUE(NameError){|v|v.no_name!}
     attr_validator :no_exception, QUIET(->v{v.class})
     attr_validator :not_integer, NOT(Integer)
   end
@@ -109,9 +110,9 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     
     obj = Object.new
     
-    sth.catch_name_error = obj
-    assert_same obj, sth.catch_name_error
-    sth.catch_name_error = false
+    sth.catch_error = obj
+    assert_same obj, sth.catch_error
+    sth.catch_error = false
 
     obj.singleton_class.class_eval do
       def no_name!
@@ -119,8 +120,49 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     end
 
     assert_raises Validation::InvalidWritingError do
-      sth.catch_name_error = obj
+      sth.catch_error = obj
     end
+    
+    obj.singleton_class.class_eval do
+      remove_method :no_name!
+      
+      def no_name!
+        raise NameError
+      end
+    end
+  
+    assert_raises Validation::InvalidWritingError do
+      sth.catch_error = obj
+    end
+  end
+
+  def test_rescue
+    sth = Sth.new
+    
+    obj = Object.new
+    
+    sth.rescue_error = obj
+    assert_same obj, sth.rescue_error
+    sth.rescue_error = false
+
+    obj.singleton_class.class_eval do
+      def no_name!
+      end
+    end
+
+    assert_raises Validation::InvalidWritingError do
+      sth.rescue_error = obj
+    end
+    
+    obj.singleton_class.class_eval do
+      remove_method :no_name!
+      
+      def no_name!
+        raise NameError
+      end
+    end
+  
+    sth.rescue_error = obj
   end
 
   def test_or

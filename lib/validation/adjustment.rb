@@ -4,7 +4,9 @@ module Validation
 
   module Adjustment
     module_function
-
+    
+    # @group Support Building Adjusters
+    
     # true if argument is sufficient for adjuster.
     # A adjuster have to be arity equal 1.
     # @param [Object] object
@@ -71,6 +73,8 @@ module Validation
         end
       }
     end
+    
+    # @endgroup
   end
 
 end

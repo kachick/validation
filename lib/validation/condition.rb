@@ -5,6 +5,8 @@ module Validation
   module Condition
     module_function
 
+    # @group Support Building Conditions
+    
     # true if object is sufficient for condition.
     # @param [Object] object
     def conditionable?(object)
@@ -222,8 +224,10 @@ module Validation
       }
     end
 
-    # Useful Conditions
+    # @endgroup
     
+    # @group Useful Conditions
+
     ANYTHING = Object.new.freeze
     BOOLEAN = ->v{[true, false].any?{|bool|bool.equal? v}}
     STRINGABLE = OR(String, Symbol, CAN(:to_str), CAN(:to_sym))
@@ -250,6 +254,8 @@ module Validation
     def STRINGABLE?
       STRINGABLE
     end
+    
+    # @endgroup
   end
 
 end

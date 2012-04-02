@@ -11,7 +11,6 @@ module Validation
   module Validatable 
     module Eigen
       ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
-      METHOD_OPTIONS = [:arg, :args, :ret, :doc].freeze
       
       def attr_reader_with_validation(name, condition)
         define_method name do

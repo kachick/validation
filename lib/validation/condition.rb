@@ -176,7 +176,7 @@ module Validation
         begin
           _valid? condition, v
         rescue Exception
-          $!.class.equal? exception
+          $!.instance_of? exception
         else
           false
         end

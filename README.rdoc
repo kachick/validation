@@ -1,8 +1,7 @@
 = Validation
 
-* http://github.com/kachick/validation
-* http://rubygems.org/gems/validation
-* http://rubyforge.org/projects/validation
+code :: https://github.com/kachick/validation
+bugs :: https://github.com/kachick/validation/issues
 
 == Description
 
@@ -16,10 +15,12 @@ A way of defining validations anywhere.
 
 == Usage
 
-* setup
+=== Setup
+
     require 'validation'
 
-* a case
+=== Validatable
+
     class Person
       include Validation
       
@@ -27,23 +28,20 @@ A way of defining validations anywhere.
       attr_validator :id, OR(nil, AND(Integer, 1..100))
     end
 
-* (writing...) # see Striuct
+* (writing...)
 
 == Requirements
 
 * Ruby 1.9.2 or later
-  
-  target release versions
-  
-  * 1.9.3-p125
-  * 1.9.2-p290
 
 == Installation
 
-* gem install validation
+    gem install validation
 
 == License
 
-Copyright (C) 2011-2012  Kenichi Kamiya
+The MIT X License
 
-The MIT License (See the file LICENSE)
+Copyright (C) 2011-2012 Kenichi Kamiya
+
+See the file LICENSE for further details.

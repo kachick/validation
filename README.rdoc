@@ -1,8 +1,5 @@
 = Validation
 
-code :: https://github.com/kachick/validation
-bugs :: https://github.com/kachick/validation/issues
-
 == Description
 
 A way of defining validations anywhere.
@@ -37,6 +34,14 @@ A way of defining validations anywhere.
 == Installation
 
     gem install validation
+
+== Links
+
+code   :: https://github.com/kachick/validation
+issues :: https://github.com/kachick/validation/issues
+CI     :: http://travis-ci.org/#!/kachick/validation
+gem    :: https://rubygems.org/gems/validation
+gem+   :: http://metagem.info/gems/validation
 
 == License
 

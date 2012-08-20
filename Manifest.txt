@@ -3,6 +3,8 @@ LICENSE
 History.rdoc
 Manifest.txt
 Rakefile
+Gemfile
+validation.gemspec
 lib/validation.rb
 lib/validation/version.rb
 lib/validation/errors.rb

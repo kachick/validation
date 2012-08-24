@@ -176,7 +176,6 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     assert_equal 1, sth.all_pass
     sth.all_pass = 4
     assert_equal 4, sth.all_pass
-    #~ assert_equal true, sth.valid?(:all_pass)
   end
 
   def test_and
@@ -192,8 +191,6 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   
     sth.has_ignore = 3
     assert_equal 3, sth.has_ignore
-    #~ assert_equal true, sth.valid?(:has_ignore)
-    
     assert_raises Validation::InvalidWritingError do
       sth.has_ignore = []
     end
@@ -212,7 +209,6 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   
     sth.nand = 2
     assert_equal 2, sth.nand
-    #~ assert_equal true, sth.valid?(:nand)
     sth.nand = []
     assert_equal [], sth.nand
   end
@@ -226,7 +222,6 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   
     sth.one_of_member = 3
     assert_equal 3, sth.one_of_member
-    #~ assert_equal true, sth.valid?(:one_of_member)
   end
   
   def test_generics
@@ -238,12 +233,8 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
   
     sth.list_only_int = [1, 2]
     assert_equal [1, 2], sth.list_only_int
-    #~ assert_equal true, sth.valid?(:list_only_int)
     sth.list_only_int = []
     assert_equal [], sth.list_only_int
-    #~ assert_equal true, sth.valid?(:list_only_int)
-    #~ sth.list_only_int << '2'
-    #~ assert_equal false, sth.valid?(:list_only_int)
   end
   
   def test_boolean
@@ -252,15 +243,11 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     assert_raises Validation::InvalidWritingError do
       sth.true_or_false = nil
     end
-    
-    #~ assert_equal false, sth.valid?(:true_or_false)
-  
+ 
     sth.true_or_false = true
     assert_equal true, sth.true_or_false
-    #~ assert_equal true, sth.valid?(:true_or_false)
     sth.true_or_false = false
     assert_equal false, sth.true_or_false
-    #~ assert_equal true, sth.valid?(:true_or_false)
   end
   
   def test_STRINGABLE?
@@ -271,18 +258,10 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
       sth.like_str = obj
     end
   
-    #~ sth.like_str = 'str'
-    #~ assert_equal true, sth.valid?(:like_str)
-    #~ sth.like_str = :sym
-    #~ assert_equal true, sth.valid?(:like_str)
-    
     obj.singleton_class.class_eval do
       def to_str
       end
     end
-    
-    #~ sth.like_str = obj
-    #~ assert_equal true, sth.valid?(:like_str)
   end
 
   def test_responsible_arg1
@@ -300,7 +279,6 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     
     sth.has_x = obj
     assert_equal obj, sth.has_x
-    #~ assert_equal true, sth.valid?(:has_x)
   end
 
   def test_responsible_arg2
@@ -327,7 +305,6 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     
     sth.has_x_and_y = obj
     assert_equal obj, sth.has_x_and_y
-    #~ assert_equal true, sth.valid?(:has_x_and_y)
   end
 end
 

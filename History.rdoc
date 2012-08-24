@@ -3,6 +3,7 @@
 * modify:
 
   * Adjust test-case for YAML in Ruby1.9.2
+  * Adjust test-case for JRuby bugs
   * Name of Exceptions sequence changed 
 
 === 0.0.3 2012-04-03

@@ -1,13 +1,16 @@
-= Validation
+= validation
+
+{<img src="https://secure.travis-ci.org/kachick/validation.png" />}[http://travis-ci.org/kachick/validation]
 
 == Description
 
-A way of defining validations anywhere.
+Support validations
 
 == Features
 
-* Easy and Flexible Validations
-* Hook just before running setters
+* Provide a way of defining validations anywhere.
+* Easy and Flexible validation combinators.
+* And adjusters.
 * Pure Ruby :)
 
 == Usage
@@ -19,21 +22,29 @@ A way of defining validations anywhere.
 === Validatable
 
     class Person
+
       include Validation
       
       attr_validator :name, String
       attr_validator :id, OR(nil, AND(Integer, 1..100))
+
     end
 
-* (writing...)
+=== More Examples
+
+See below libraries
+
+* {striuct}[https://github.com/kachick/striuct]
+* {io-nosey}[https://github.com/kachick/io-nosey]
+* {family}[https://github.com/kachick/family]
 
 == Requirements
 
-* Ruby 1.9.2 or later
+* Ruby 1.9.2 or later ({MRI/YARV, Rubinius, JRuby}[http://travis-ci.org/#!/kachick/validation])
 
 == Installation
 
-    gem install validation
+    $ gem install validation
 
 == Links
 

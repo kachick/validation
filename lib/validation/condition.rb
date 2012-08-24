@@ -1,8 +1,7 @@
-# Copyright (C) 2011-2012  Kenichi Kamiya
-
 module Validation
 
   module Condition
+
     module_function
 
     # @group Support Building Conditions
@@ -256,6 +255,7 @@ module Validation
     end
     
     # @endgroup
+
   end
 
 end

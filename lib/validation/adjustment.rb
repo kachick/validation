@@ -1,8 +1,7 @@
-# Copyright (C) 2011-2012  Kenichi Kamiya
-
 module Validation
 
   module Adjustment
+
     module_function
     
     # @group Support Building Adjusters
@@ -75,6 +74,7 @@ module Validation
     end
     
     # @endgroup
+
   end
 
 end

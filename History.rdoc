@@ -1,3 +1,10 @@
+=== 0.0.3.1 2012-08-25
+
+* modify:
+
+  * Adjust test-case for YAML in Ruby1.9.2
+  * Name of Exceptions sequence changed 
+
 === 0.0.3 2012-04-03
 
 * modify:

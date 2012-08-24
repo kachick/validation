@@ -6,13 +6,14 @@ Rakefile
 Gemfile
 validation.gemspec
 lib/validation.rb
+lib/validation/requirements.rb
 lib/validation/version.rb
 lib/validation/errors.rb
 lib/validation/condition.rb
 lib/validation/adjustment.rb
 lib/validation/validatable.rb
 lib/validation/validatable/classmethods.rb
-lib/validation/singletonclass.rb
+lib/validation/singleton_class.rb
 lib/validation/module_functions.rb
 test/test_helper.rb
 test/test_validation.rb

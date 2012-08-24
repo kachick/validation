@@ -26,8 +26,13 @@ module Validation
     # Apply adjuster when passed condition.
     # @return [lambda]
     def WHEN(condition, adjuster)
-      raise TypeError, 'wrong object for condition' unless Validation.conditionable? condition
-      raise TypeError, 'wrong object for adjuster' unless Validation.adjustable? adjuster
+      unless Validation.conditionable? condition
+        raise TypeError, 'wrong object for condition' 
+      end
+
+      unless Validation.adjustable? adjuster
+        raise TypeError, 'wrong object for adjuster' 
+      end
       
       ->v{_valid?(condition, v) ? adjuster.call(v) : v}
     end

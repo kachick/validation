@@ -390,7 +390,7 @@ class TestValidationAdjustment < Test::Unit::TestCase
 
     attr_validator :chomped, AND(Symbol, NOT(/\n/)), &WHEN(String, ->v{v.chomp!.to_sym})
     attr_validator :no_reduced, Symbol, &->v{v.to_sym}
-    attr_validator :reduced, Symbol, &INJECT(->v{v.to_s}, ->v{v.to_sym})
+    attr_validator :reduced, Symbol, &INJECT(->v{v.foo}, ->v{v.to_sym})
     attr_validator :integer, Integer, &PARSE(Integer)
     attr_validator :myobj, ->v{v.instance_of? MyClass}, &PARSE(MyClass)
   end
@@ -416,14 +416,21 @@ class TestValidationAdjustment < Test::Unit::TestCase
 
   def test_REDUCE
     sth = Sth.new
-    
+    obj = Object.new
+
+    obj.singleton_class.class_eval do
+      def foo
+        'This is strings :)'
+      end
+    end
+
     assert_raises Validation::InvalidAdjustingError do
-      sth.no_reduced = 1
+      sth.no_reduced = obj
     end
     
-    sth.reduced = 1
+    sth.reduced = obj
     
-    assert_equal :'1', sth.reduced
+    assert_equal :'This is strings :)', sth.reduced
   end
   
   def test_PARSE

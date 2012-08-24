@@ -62,8 +62,8 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     attr_validator :list_only_int, GENERICS(Integer)
     attr_validator :true_or_false, BOOL?
     attr_validator :like_str, STRINGABLE?
-    attr_validator :has_x, CAN(:x)
-    attr_validator :has_x_and_y, CAN(:x, :y)
+    attr_validator :has_foo, CAN(:foo)
+    attr_validator :has_foo_and_bar, CAN(:foo, :bar)
     attr_validator :one_of_member, MEMBER_OF([1, 3])
     attr_validator :has_ignore, AND(1..5, 3..10)
     attr_validator :nand, NAND(1..5, 3..10)
@@ -268,43 +268,54 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     sth = Sth.new
     obj = Object.new
     
+    raise if obj.respond_to? :foo
+
     assert_raises Validation::InvalidWritingError do
-      sth.has_x = obj
+      sth.has_foo = obj
     end
     
     obj.singleton_class.class_eval do
-      def x
+      def foo
       end
     end
+
+    raise unless obj.respond_to? :foo
     
-    sth.has_x = obj
-    assert_equal obj, sth.has_x
+    sth.has_foo = obj
+    assert_equal obj, sth.has_foo
   end
 
   def test_responsible_arg2
     sth = Sth.new
     obj = Object.new
-    
+
+    raise if obj.respond_to? :foo
+    raise if obj.respond_to? :bar
+
     assert_raises Validation::InvalidWritingError do
-      sth.has_x_and_y = obj
+      sth.has_foo_and_bar = obj
     end
     
     obj.singleton_class.class_eval do
-      def x
+      def foo
       end
     end
     
+    raise unless obj.respond_to? :foo
+
     assert_raises Validation::InvalidWritingError do
-      sth.has_x_and_y = obj
+      sth.has_foo_and_bar = obj
     end
     
     obj.singleton_class.class_eval do
-      def y
+      def bar
       end
     end
+
+    raise unless obj.respond_to? :bar
     
-    sth.has_x_and_y = obj
-    assert_equal obj, sth.has_x_and_y
+    sth.has_foo_and_bar = obj
+    assert_equal obj, sth.has_foo_and_bar
   end
 end
 

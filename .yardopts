@@ -1,1 +1,1 @@
---readme README.md --protected --private lib/**/*.rb --exclude inner|instancemethods/singleton_class - LICENSE
+--readme README.md lib/**/*.rb - LICENSE

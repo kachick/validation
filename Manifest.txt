@@ -1,4 +1,4 @@
-README.rdoc
+README.md
 LICENSE
 History.rdoc
 Manifest.txt

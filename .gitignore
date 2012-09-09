@@ -30,3 +30,7 @@ doc/
 
 # other
 *.lock
+*.bak
+tool/
+.rbx/
+*\#*

@@ -62,7 +62,7 @@ Link
 ----
 
 * [code](https://github.com/kachick/validation)
-* [API](http://kachick.github.com/docs/validation/api/frames.html)
+* [API](http://kachick.github.com/validation/yard/frames.html)
 * [issues](https://github.com/kachick/validation/issues)
 * [CI](http://travis-ci.org/#!/kachick/validation)
 * [gem](https://rubygems.org/gems/validation)

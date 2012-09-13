@@ -49,12 +49,12 @@ See below libraries
 Requirements
 -------------
 
-* Ruby 1.9.2 or later [MRI/YARV, Rubinius, JRuby](http://travis-ci.org/#!/kachick/validation)
+* [Ruby 1.9.2 or later](http://travis-ci.org/#!/kachick/validation)
 
 Install
 -------
 
-```shell
+```bash
 $ gem install validation
 ```
 
@@ -73,4 +73,3 @@ License
 The MIT X11 License  
 Copyright (c) 2011-2012 Kenichi Kamiya  
 See the file LICENSE for further details.
-

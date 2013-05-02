@@ -20,4 +20,3 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'yard', '>= 0.8.2.1'
   gem.add_development_dependency 'rdoc', '>= 3.12'
 end
-

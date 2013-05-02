@@ -4,4 +4,3 @@ module Validation
 end
 
 require_relative 'validation/requirements'
-

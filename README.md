@@ -35,6 +35,12 @@ class Person
   attr_validator :name, String
   attr_validator :id, OR(nil, AND(Integer, 1..100))
 end
+
+person = Person.new
+person.name = :Ken  #=> Error (Symbol is not String)
+person.id   = 200   #=> Error (200 is not covered by 1..100)
+person.name = 'Ken' #=> Pass
+person.id   = 1     #=> Pass
 ```
 
 ### More Examples

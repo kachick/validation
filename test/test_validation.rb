@@ -59,6 +59,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     include Validation
 
     attr_validator :list_only_int, GENERICS(Integer)
+    attr_validator :list_only_int_2, ALL(Integer)
     attr_validator :true_or_false, BOOL?
     attr_validator :like_str, STRINGABLE?
     attr_validator :has_foo, CAN(:foo)
@@ -235,7 +236,20 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     sth.list_only_int = []
     assert_equal [], sth.list_only_int
   end
+
+  def test_all
+    sth = Sth.new
+    
+    assert_raises Validation::InvalidWritingError do
+      sth.list_only_int_2 = [1, '2']
+    end
   
+    sth.list_only_int_2 = [1, 2]
+    assert_equal [1, 2], sth.list_only_int_2
+    sth.list_only_int_2 = []
+    assert_equal [], sth.list_only_int_2
+  end
+
   def test_boolean
     sth = Sth.new
     

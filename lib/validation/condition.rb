@@ -186,7 +186,7 @@ module Validation
     # @return [lambda]
     #   this lambda return true
     #   if all included objects match all conditions
-    def GENERICS(condition1, *conditions)
+    def ALL(condition1, *conditions)
       conditions = [condition1, *conditions]
       unless conditions.all?{|c|conditionable? c}
         raise TypeError, 'wrong object for condition'
@@ -207,6 +207,9 @@ module Validation
         }
       }
     end
+
+    alias_method :GENERICS, :ALL
+    module_function :GENERICS
     
     # A condition builder.
     # @return [lambda]

@@ -20,6 +20,7 @@ module Validation
     # Condition Builders
     # A innner method for some condition builders.
     # For build conditions AND, NAND, OR, NOR, XOR, XNOR.
+    # @param delegated [Symbol]
     # @return [lambda] 
     def _logical_operator(delegated, *conditions)
       unless conditions.all?{|c|conditionable? c}
@@ -38,6 +39,9 @@ module Validation
     end
 
     # A condition builder.
+    # @param cond1 [Proc, Mehtod #===]
+    # @param cond2 [Proc, Mehtod #===]
+    # @param conds [Proc, Mehtod #===]
     # @return [lambda]
     #   this lambda return true if match all conditions
     def AND(cond1, cond2, *conds)
@@ -45,12 +49,18 @@ module Validation
     end
   
     # A condition builder.
+    # @param cond1 [Proc, Mehtod #===]
+    # @param cond2 [Proc, Mehtod #===]
+    # @param conds [Proc, Mehtod #===]
     # @return [lambda] 
     def NAND(cond1, cond2, *conds)
       NOT AND(cond1, cond2, *conds)
     end
 
     # A condition builder.
+    # @param cond1 [Proc, Mehtod #===]
+    # @param cond2 [Proc, Mehtod #===]
+    # @param conds [Proc, Mehtod #===]
     # @return [lambda]
     #   this lambda return true if match a any condition
     def OR(cond1, cond2, *conds)
@@ -58,24 +68,34 @@ module Validation
     end
 
     # A condition builder.
-    # @return [lambda] 
+    # @param cond1 [Proc, Mehtod #===]
+    # @param cond2 [Proc, Mehtod #===]
+    # @param conds [Proc, Mehtod #===]
+    # @return [lambda]
     def NOR(cond1, cond2, *conds)
       NOT OR(cond1, cond2, *conds)
     end
 
     # A condition builder.
-    # @return [lambda] 
+    # @param cond1 [Proc, Mehtod #===]
+    # @param cond2 [Proc, Mehtod #===]
+    # @param conds [Proc, Mehtod #===]
+    # @return [lambda]
     def XOR(cond1, cond2, *conds)
       _logical_operator :one?, cond1, cond2, *conds
     end
     
     # A condition builder.
+    # @param cond1 [Proc, Mehtod #===]
+    # @param cond2 [Proc, Mehtod #===]
+    # @param conds [Proc, Mehtod #===]
     # @return [lambda] 
     def XNOR(cond1, cond2, *conds)
       NOT XOR(cond1, cond2, *conds)
     end
 
     # A condition builder.
+    # @param condition [Proc, Mehtod #===]
     # @return [lambda] A condition invert the original condition.
     def NOT(condition)
       unless conditionable? condition
@@ -86,6 +106,7 @@ module Validation
     end
 
     # A condition builder.
+    # @param obj [#==]
     # @return [lambda]
     #   this lambda return true if a argment match under #== method
     def EQUAL(obj)
@@ -93,6 +114,7 @@ module Validation
     end
 
     # A condition builder.
+    # @param obj [#equal?]
     # @return [lambda]
     #   this lambda return true if a argment match under #equal? method
     def SAME(obj)
@@ -100,7 +122,7 @@ module Validation
     end
 
     # A condition builder.
-    # @param [Symbol, String] messages
+    # @param messages [Symbol, String]
     # @return [lambda]
     #   this lambda return true if a argment respond to all messages
     def CAN(message1, *messages)
@@ -117,19 +139,21 @@ module Validation
     end
 
     # A condition builder.
+    # @param condition [Proc, Mehtod #===]
+    # @param conditions [Proc, Mehtod #===]
     # @return [lambda]
     #   this lambda return true
     #   if face no exception when a argment checking under all conditions 
-    def QUIET(condition1, *conditions)
-      conditions = [condition1, *conditions]
+    def QUIET(condition, *conditions)
+      conditions = [condition, *conditions]
       unless conditions.all?{|c|conditionable? c}
         raise TypeError, 'wrong object for condition'
       end
       
       ->v{
-        conditions.all?{|condition|
+        conditions.all?{|cond|
           begin
-            _valid? condition, v
+            _valid? cond, v
           rescue Exception
             false
           else
@@ -140,11 +164,13 @@ module Validation
     end
     
     # A condition builder.
+    # @param exception [Exception]
+    # @param exceptions [Exception]
     # @return [lambda]
     #   this lambda return true
     #   if catch any kindly exceptions when a argment checking in a block parameter
-    def RESCUE(_exception, *exceptions, &condition)
-      exceptions = [_exception, *exceptions]
+    def RESCUE(exception, *exceptions, &condition)
+      exceptions = [exception, *exceptions]
       raise ArgumentError unless conditionable? condition
       raise TypeError unless exceptions.all?{|e|e.ancestors.include? Exception}
       
@@ -162,6 +188,7 @@ module Validation
     end
 
     # A condition builder.
+    # @param exception [Exception]
     # @return [lambda]
     #   this lambda return true
     #   if catch a specific exception when a argment checking in a block parameter
@@ -181,11 +208,13 @@ module Validation
     end
 
     # A condition builder.
+    # @param condition [Proc, Mehtod #===]
+    # @param conditions [Proc, Mehtod #===]
     # @return [lambda]
     #   this lambda return true
     #   if all included objects match all conditions
-    def ALL(condition1, *conditions)
-      conditions = [condition1, *conditions]
+    def ALL(condition, *conditions)
+      conditions = [condition, *conditions]
       unless conditions.all?{|c|conditionable? c}
         raise TypeError, 'wrong object for condition'
       end
@@ -198,9 +227,9 @@ module Validation
           return false
         )
       
-        conditions.all?{|condition|
+        conditions.all?{|cond|
           enum.all?{|v|
-            _valid? condition, v
+            _valid? cond, v
           }
         }
       }
@@ -210,17 +239,19 @@ module Validation
     module_function :GENERICS
     
     # A condition builder.
+    # @param list [#all?]
+    # @param lists [#all?]
     # @return [lambda]
     #   this lambda return true
     #   if all lists including the object
-    def MEMBER_OF(list1, *lists)
-      lists = [list1, *lists]
+    def MEMBER_OF(list, *lists)
+      lists = [list, *lists]
       unless lists.all?{|l|l.respond_to? :all?}
         raise TypeError, 'list must respond #all?'
       end
       
       ->v{
-        lists.all?{|list|list.include? v}
+        lists.all?{|l|l.include? v}
       }
     end
 

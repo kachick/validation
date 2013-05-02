@@ -3,7 +3,9 @@ module Validation; module Validatable
   module ClassMethods
 
     ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
-    
+
+    # @param name [Symbol, String]
+    # @param condition [Proc, Mehtod #===]
     def attr_reader_with_validation(name, condition=ANYTHING)
       define_method name do
         value = instance_variable_get :"@#{name}"
@@ -18,7 +20,9 @@ module Validation; module Validatable
       
       nil
     end
-  
+
+    # @param name [Symbol, String]
+    # @param condition [Proc, Mehtod #===]  
     def attr_writer_with_validation(name, condition=ANYTHING, &adjuster)        
       if block_given?
         adjustment = true
@@ -46,6 +50,11 @@ module Validation; module Validatable
       nil
     end
 
+    # @param name [Symbol, String]
+    # @param condition [Proc, Mehtod #===]
+    # @param options [Hash]
+    # @option options [Boolean] :reader_validation
+    # @option options [Boolean] :writer_validation
     def attr_accessor_with_validation(name, condition=ANYTHING, options={writer_validation: true}, &adjuster)
       unless (options.keys - ACCESSOR_OPTIONS).empty?
         raise ArgumentError, 'invalid option parameter is'

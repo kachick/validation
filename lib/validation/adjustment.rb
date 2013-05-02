@@ -8,7 +8,6 @@ module Validation
     
     # true if argument is sufficient for adjuster.
     # A adjuster have to be arity equal 1.
-    # @param [Object] object
     def adjustable?(object)
       case object
       when Proc
@@ -24,6 +23,8 @@ module Validation
   
     # Adjuster Builders
     # Apply adjuster when passed condition.
+    # @param condition [Proc, Mehtod #===]
+    # @param adjuster [Proc, #to_proc]
     # @return [lambda]
     def WHEN(condition, adjuster)
       unless Validation.conditionable? condition
@@ -38,6 +39,9 @@ module Validation
     end
     
     # Sequencial apply all adjusters.
+    # @param adjuster1 [Proc, #to_proc]
+    # @param adjuster2 [Proc, #to_proc]
+    # @param adjusters [Proc, #to_proc]
     # @return [lambda]
     def INJECT(adjuster1, adjuster2, *adjusters)
       adjusters = [adjuster1, adjuster2, *adjusters]
@@ -52,6 +56,7 @@ module Validation
     end
 
     # Accept any parser when that resopond to parse method.
+    # @param parser [#parse]
     # @return [lambda]
     def PARSE(parser)
       if !::Integer.equal?(parser) and !parser.respond_to?(:parse)

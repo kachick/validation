@@ -7,7 +7,7 @@ validation
 Description
 -----------
 
-Support validations
+I think validations are not only for Web Apps :)
 
 Features
 --------
@@ -19,6 +19,10 @@ Features
 
 Usage
 -----
+
+### How to build flexible conditions
+
+* See the [API doc](http://kachick.github.com/validation/yard/frames.html)
 
 ### An optional extension for accessor with validation.
 
@@ -33,13 +37,10 @@ class Person
 end
 ```
 
-### How to build flexible conditions
-
-* See the API doc
-
 ### More Examples
 
 * [striuct](https://github.com/kachick/striuct)
+* [optionalargument](https://github.com/kachick/optionalargument)
 * [io-nosey](https://github.com/kachick/io-nosey)
 * [family](https://github.com/kachick/family)
 

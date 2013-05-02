@@ -10,8 +10,6 @@ module Validation
     # @param [Object] object
     def conditionable?(object)
       case object
-      when ANYTHING
-        true
       when Proc, Method
         object.arity == 1
       else
@@ -229,18 +227,11 @@ module Validation
     # @endgroup
     
     # @group Useful Conditions
-
-    ANYTHING = Object.new.freeze
+    ANYTHING = BasicObject # BasicObject.=== always passing
     BOOLEAN = ->v{[true, false].any?{|bool|bool.equal? v}}
     STRINGABLE = OR(String, Symbol, CAN(:to_str), CAN(:to_sym))
     
     module_function
-    
-    # The getter for a special condition.
-    # @return [ANYTHING] A condition always pass with any objects.
-    def ANYTHING?
-      ANYTHING
-    end
     
     # A getter for a useful condition.
     # @return [BOOLEAN] "true or false"

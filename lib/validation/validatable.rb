@@ -17,8 +17,6 @@ module Validation
     # @param [Object] value
     def _valid?(condition, value)
       case condition
-      when ::Validation::Condition::ANYTHING
-        true
       when Proc
         instance_exec value, &condition
       when Method

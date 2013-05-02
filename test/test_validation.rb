@@ -74,6 +74,10 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     attr_validator :not_integer, NOT(Integer)
   end
 
+  def test_anything
+    assert(Validation::Condition::ANYTHING === BasicObject.new)
+  end
+
   def test_not
     sth = Sth.new
     

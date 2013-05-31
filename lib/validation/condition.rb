@@ -263,6 +263,10 @@ module Validation
     STRINGABLE = OR(String, Symbol, CAN(:to_str), CAN(:to_sym))
     
     module_function
+
+    def ANYTHING?
+      ANYTHING
+    end
     
     # A getter for a useful condition.
     # @return [BOOLEAN] "true or false"

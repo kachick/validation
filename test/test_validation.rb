@@ -60,6 +60,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
 
     attr_validator :list_only_int, GENERICS(Integer)
     attr_validator :list_only_int_2, ALL(Integer)
+    attr_validator :always_passing, ANYTHING?
     attr_validator :true_or_false, BOOL?
     attr_validator :like_str, STRINGABLE?
     attr_validator :has_foo, CAN(:foo)
@@ -76,6 +77,13 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
 
   def test_anything
     assert(Validation::Condition::ANYTHING === BasicObject.new)
+
+    sth = Sth.new
+    
+    obj = BasicObject.new
+    
+    sth.always_passing = obj
+    assert_same obj, sth.always_passing
   end
 
   def test_not

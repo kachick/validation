@@ -55,6 +55,8 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
 end
 
 class TestValidationSpecificConditions < Test::Unit::TestCase
+  EQUALITY_CHECKER = ':)'.freeze
+
   class Sth
     include Validation
 
@@ -73,6 +75,9 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     attr_validator :rescue_error, RESCUE(NameError){|v|v.no_name!}
     attr_validator :no_exception, QUIET(->v{v.class})
     attr_validator :not_integer, NOT(Integer)
+    attr_validator :eq, EQ(EQUALITY_CHECKER)
+    attr_validator :equal, EQUAL(EQUALITY_CHECKER)
+    attr_validator :same, SAME(EQUALITY_CHECKER)
   end
 
   def test_anything
@@ -341,6 +346,39 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     
     sth.has_foo_and_bar = obj
     assert_equal obj, sth.has_foo_and_bar
+  end
+
+  def test_eq
+    sth = Sth.new
+
+    assert_raises Validation::InvalidWritingError do
+      sth.eq = (EQUALITY_CHECKER.dup << ':(')
+    end
+    
+    sth.eq = EQUALITY_CHECKER.dup
+    assert_equal EQUALITY_CHECKER, sth.eq
+  end
+
+  def test_equal
+    sth = Sth.new
+
+    assert_raises Validation::InvalidWritingError do
+      sth.equal = EQUALITY_CHECKER.dup
+    end
+    
+    sth.equal = EQUALITY_CHECKER
+    assert_same EQUALITY_CHECKER, sth.equal
+  end
+
+  def test_same
+    sth = Sth.new
+
+    assert_raises Validation::InvalidWritingError do
+      sth.same = EQUALITY_CHECKER.dup
+    end
+    
+    sth.same = EQUALITY_CHECKER
+    assert_same EQUALITY_CHECKER, sth.same
   end
 end
 

@@ -109,7 +109,7 @@ module Validation
     # @param obj [#==]
     # @return [lambda]
     #   this lambda return true if a argment match under #== method
-    def EQUAL(obj)
+    def EQ(obj)
       ->v{obj == v}
     end
 
@@ -117,9 +117,12 @@ module Validation
     # @param obj [#equal?]
     # @return [lambda]
     #   this lambda return true if a argment match under #equal? method
-    def SAME(obj)
+    def EQUAL(obj)
       ->v{obj.equal? v}
     end
+
+    alias_method :SAME, :EQUAL
+    module_function :SAME
 
     # A condition builder.
     # @param messages [Symbol, String]

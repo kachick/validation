@@ -5,7 +5,7 @@ module Validation; module Validatable
     ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
 
     # @param name [Symbol, String]
-    # @param condition [Proc, Mehtod #===]
+    # @param condition [Proc, Method, #===]
     def attr_reader_with_validation(name, condition=ANYTHING)
       define_method name do
         value = instance_variable_get :"@#{name}"
@@ -22,7 +22,7 @@ module Validation; module Validatable
     end
 
     # @param name [Symbol, String]
-    # @param condition [Proc, Mehtod #===]  
+    # @param condition [Proc, Method, #===]  
     def attr_writer_with_validation(name, condition=ANYTHING, &adjuster)        
       if block_given?
         adjustment = true
@@ -51,7 +51,7 @@ module Validation; module Validatable
     end
 
     # @param name [Symbol, String]
-    # @param condition [Proc, Mehtod #===]
+    # @param condition [Proc, Method, #===]
     # @param options [Hash]
     # @option options [Boolean] :reader_validation
     # @option options [Boolean] :writer_validation

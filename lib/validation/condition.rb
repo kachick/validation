@@ -39,9 +39,9 @@ module Validation
     end
 
     # A condition builder.
-    # @param cond1 [Proc, Mehtod #===]
-    # @param cond2 [Proc, Mehtod #===]
-    # @param conds [Proc, Mehtod #===]
+    # @param cond1 [Proc, Method, #===]
+    # @param cond2 [Proc, Method, #===]
+    # @param conds [Proc, Method, #===]
     # @return [lambda]
     #   this lambda return true if match all conditions
     def AND(cond1, cond2, *conds)
@@ -49,18 +49,18 @@ module Validation
     end
   
     # A condition builder.
-    # @param cond1 [Proc, Mehtod #===]
-    # @param cond2 [Proc, Mehtod #===]
-    # @param conds [Proc, Mehtod #===]
+    # @param cond1 [Proc, Method, #===]
+    # @param cond2 [Proc, Method, #===]
+    # @param conds [Proc, Method, #===]
     # @return [lambda] 
     def NAND(cond1, cond2, *conds)
       NOT AND(cond1, cond2, *conds)
     end
 
     # A condition builder.
-    # @param cond1 [Proc, Mehtod #===]
-    # @param cond2 [Proc, Mehtod #===]
-    # @param conds [Proc, Mehtod #===]
+    # @param cond1 [Proc, Method, #===]
+    # @param cond2 [Proc, Method, #===]
+    # @param conds [Proc, Method, #===]
     # @return [lambda]
     #   this lambda return true if match a any condition
     def OR(cond1, cond2, *conds)
@@ -68,34 +68,34 @@ module Validation
     end
 
     # A condition builder.
-    # @param cond1 [Proc, Mehtod #===]
-    # @param cond2 [Proc, Mehtod #===]
-    # @param conds [Proc, Mehtod #===]
+    # @param cond1 [Proc, Method, #===]
+    # @param cond2 [Proc, Method, #===]
+    # @param conds [Proc, Method, #===]
     # @return [lambda]
     def NOR(cond1, cond2, *conds)
       NOT OR(cond1, cond2, *conds)
     end
 
     # A condition builder.
-    # @param cond1 [Proc, Mehtod #===]
-    # @param cond2 [Proc, Mehtod #===]
-    # @param conds [Proc, Mehtod #===]
+    # @param cond1 [Proc, Method, #===]
+    # @param cond2 [Proc, Method, #===]
+    # @param conds [Proc, Method, #===]
     # @return [lambda]
     def XOR(cond1, cond2, *conds)
       _logical_operator :one?, cond1, cond2, *conds
     end
     
     # A condition builder.
-    # @param cond1 [Proc, Mehtod #===]
-    # @param cond2 [Proc, Mehtod #===]
-    # @param conds [Proc, Mehtod #===]
+    # @param cond1 [Proc, Method, #===]
+    # @param cond2 [Proc, Method, #===]
+    # @param conds [Proc, Method, #===]
     # @return [lambda] 
     def XNOR(cond1, cond2, *conds)
       NOT XOR(cond1, cond2, *conds)
     end
 
     # A condition builder.
-    # @param condition [Proc, Mehtod #===]
+    # @param condition [Proc, Method, #===]
     # @return [lambda] A condition invert the original condition.
     def NOT(condition)
       unless conditionable? condition
@@ -139,8 +139,8 @@ module Validation
     end
 
     # A condition builder.
-    # @param condition [Proc, Mehtod #===]
-    # @param conditions [Proc, Mehtod #===]
+    # @param condition [Proc, Method, #===]
+    # @param conditions [Proc, Method, #===]
     # @return [lambda]
     #   this lambda return true
     #   if face no exception when a argment checking under all conditions 
@@ -208,8 +208,8 @@ module Validation
     end
 
     # A condition builder.
-    # @param condition [Proc, Mehtod #===]
-    # @param conditions [Proc, Mehtod #===]
+    # @param condition [Proc, Method, #===]
+    # @param conditions [Proc, Method, #===]
     # @return [lambda]
     #   this lambda return true
     #   if all included objects match all conditions

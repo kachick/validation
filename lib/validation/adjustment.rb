@@ -23,7 +23,7 @@ module Validation
   
     # Adjuster Builders
     # Apply adjuster when passed condition.
-    # @param condition [Proc, Mehtod #===]
+    # @param condition [Proc, Method, #===]
     # @param adjuster [Proc, #to_proc]
     # @return [lambda]
     def WHEN(condition, adjuster)

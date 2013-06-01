@@ -259,7 +259,7 @@ module Validation
     
     # @group Useful Conditions
     ANYTHING = BasicObject # BasicObject.=== always passing
-    BOOLEAN = ->v{[true, false].any?{|bool|bool.equal? v}}
+    BOOLEAN = ->v{v.equal?(true) || v.equal?(false)}
     STRINGABLE = OR(String, Symbol, CAN(:to_str), CAN(:to_sym))
     
     module_function

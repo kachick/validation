@@ -13,7 +13,7 @@ module Validation
       when Proc
         object.arity == 1
       else
-        if object.respond_to?(:to_proc)
+        if object.respond_to? :to_proc
           object.to_proc.arity == 1
         else
           false

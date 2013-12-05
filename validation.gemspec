@@ -17,6 +17,12 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake', '>= 10', '< 20'
   gem.add_development_dependency 'bundler', '>= 1.3.5', '< 2'
 
+  if RUBY_ENGINE == 'rbx'
+    gem.add_dependency 'rubysl', '~> 2.0'
+
+    gem.add_development_dependency 'test-unit', '>= 2.5.5', '< 2.6'
+  end
+
   # common
 
   gem.authors       = ['Kenichi Kamiya']

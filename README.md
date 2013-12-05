@@ -53,7 +53,7 @@ person.id   = 1     #=> Pass
 Requirements
 -------------
 
-* [Ruby 1.9.2 or later](http://travis-ci.org/#!/kachick/validation)
+* [Ruby 1.9.3 or later](http://travis-ci.org/#!/kachick/validation)
 
 Install
 -------

@@ -1,3 +1,5 @@
+# coding: us-ascii
+
 module Validation
 
   module Condition

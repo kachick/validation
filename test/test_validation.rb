@@ -1,3 +1,5 @@
+# coding: us-ascii
+
 require_relative 'test_helper'
 
 class TestValidationFunctionalCondition < Test::Unit::TestCase

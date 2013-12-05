@@ -1,3 +1,5 @@
+# coding: us-ascii
+
 require_relative 'validatable/classmethods'
 
 module Validation

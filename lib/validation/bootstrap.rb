@@ -1,3 +1,5 @@
+# coding: us-ascii
+
 require_relative 'version'
 require_relative 'errors'
 require_relative 'condition'

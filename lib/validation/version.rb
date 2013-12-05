@@ -2,6 +2,6 @@
 
 module Validation
 
-  VERSION = '0.0.7'.freeze
+  VERSION = '0.0.7.1'.freeze
 
 end

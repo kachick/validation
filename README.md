@@ -3,18 +3,16 @@ validation
 
 [![Build Status](https://secure.travis-ci.org/kachick/validation.png)](http://travis-ci.org/kachick/validation)
 [![Gem Version](https://badge.fury.io/rb/validation.png)](http://badge.fury.io/rb/validation)
+[![Dependency Status](https://gemnasium.com/kachick/validation.svg)](https://gemnasium.com/kachick/validation)
 
 Description
 -----------
 
-I think validations are not only for Web Apps :)
+Validations with Ruby objects.
 
 Features
 --------
 
-* Provide a way of defining validations anywhere
-* Easy and Flexible validation combinators
-* And adjusters
 * Pure Ruby :)
 
 Usage

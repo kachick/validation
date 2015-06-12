@@ -1,26 +1,26 @@
 # coding: us-ascii
 
-require File.expand_path('../lib/validation/version', __FILE__)
+lib_name = 'validation'.freeze
+require "./lib/#{lib_name}/version"
 
 Gem::Specification.new do |gem|
   # specific
 
-  gem.description   = %q{A way of defining validations on anywhere.}
-  gem.summary       = %q{A way of defining validations on anywhere.}
-  gem.homepage      = 'http://kachick.github.com/validation/'
+  gem.description   = %q{Validations with Ruby objects.}
+  gem.summary       = gem.description.dup
+  gem.homepage      = "http://kachick.github.com/#{lib_name}/"
   gem.license       = 'MIT'
-  gem.name          = 'validation'
+  gem.name          = lib_name.dup
   gem.version       = Validation::VERSION.dup
 
   gem.required_ruby_version = '>= 1.9.3'
-  gem.add_development_dependency 'yard', '>= 0.8.7.3', '< 0.9'
+  gem.add_development_dependency 'yard', '>= 0.8.7.6', '< 0.9'
   gem.add_development_dependency 'rake', '>= 10', '< 20'
-  gem.add_development_dependency 'bundler', '>= 1.3.5', '< 2'
+  gem.add_development_dependency 'bundler', '>= 1.10', '< 2'
+  gem.add_development_dependency 'test-unit', '>= 3.1.1', '< 4'
 
   if RUBY_ENGINE == 'rbx'
-    gem.add_dependency 'rubysl', '~> 2.0'
-
-    gem.add_development_dependency 'test-unit', '>= 2.5.5', '< 2.6'
+    gem.add_dependency 'rubysl', '~> 2.1'
   end
 
   # common

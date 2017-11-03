@@ -3,7 +3,6 @@ validation
 
 [![Build Status](https://secure.travis-ci.org/kachick/validation.png)](http://travis-ci.org/kachick/validation)
 [![Gem Version](https://badge.fury.io/rb/validation.png)](http://badge.fury.io/rb/validation)
-[![Dependency Status](https://gemnasium.com/kachick/validation.svg)](https://gemnasium.com/kachick/validation)
 
 Description
 -----------
@@ -29,7 +28,7 @@ require 'validation'
 
 class Person
   include Validation
-      
+
   attr_validator :name, String
   attr_validator :id, OR(nil, AND(Integer, 1..100))
 end
@@ -51,7 +50,7 @@ person.id   = 1     #=> Pass
 Requirements
 -------------
 
-* [Ruby 1.9.3 or later](http://travis-ci.org/#!/kachick/validation)
+* [Tested on Ruby 2.2 or later (Also 2.5 :)](http://travis-ci.org/#!/kachick/validation)
 
 Install
 -------

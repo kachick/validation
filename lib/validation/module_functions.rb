@@ -1,7 +1,6 @@
 # coding: us-ascii
 
 module Validation
-
   module_function
 
   def conditionable?(object)
@@ -11,5 +10,4 @@ module Validation
   def adjustable?(object)
     Adjustment.__send__ __callee__, object
   end
-
 end

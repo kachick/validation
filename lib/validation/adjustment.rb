@@ -1,13 +1,11 @@
 # coding: us-ascii
 
 module Validation
-
   module Adjustment
-
     module_function
-    
+
     # @group Support Building Adjusters
-    
+
     # true if argument is sufficient for adjuster.
     # A adjuster have to be arity equal 1.
     def adjustable?(object)
@@ -22,7 +20,7 @@ module Validation
         end
       end
     end
-  
+
     # Adjuster Builders
     # Apply adjuster when passed condition.
     # @param condition [Proc, Method, #===]
@@ -30,16 +28,16 @@ module Validation
     # @return [lambda]
     def WHEN(condition, adjuster)
       unless Validation.conditionable? condition
-        raise TypeError, 'wrong object for condition' 
+        raise TypeError, 'wrong object for condition'
       end
 
       unless Validation.adjustable? adjuster
-        raise TypeError, 'wrong object for adjuster' 
+        raise TypeError, 'wrong object for adjuster'
       end
-      
+
       ->v{_valid?(condition, v) ? adjuster.call(v) : v}
     end
-    
+
     # Sequencial apply all adjusters.
     # @param adjuster1 [Proc, #to_proc]
     # @param adjuster2 [Proc, #to_proc]
@@ -64,7 +62,7 @@ module Validation
       if !::Integer.equal?(parser) and !parser.respond_to?(:parse)
         raise TypeError, 'wrong object for parser'
       end
-      
+
       ->v{
         if ::Integer.equal? parser
           ::Kernel.Integer v
@@ -76,7 +74,7 @@ module Validation
             when ->_{v.respond_to? :to_str}
               v.to_str
             when ->_{v.respond_to? :read}
-              v.read            
+              v.read
             else
               raise TypeError, 'wrong object for parsing source'
             end
@@ -84,9 +82,7 @@ module Validation
         end
       }
     end
-    
+
     # @endgroup
-
   end
-
 end

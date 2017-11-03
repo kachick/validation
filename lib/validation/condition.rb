@@ -1,13 +1,10 @@
 # coding: us-ascii
 
 module Validation
-
   module Condition
-
     module_function
-
     # @group Support Building Conditions
-    
+
     # true if object is sufficient for condition.
     # @param [Object] object
     def conditionable?(object)
@@ -18,24 +15,24 @@ module Validation
         object.respond_to? :===
       end
     end
-  
+
     # Condition Builders
     # A innner method for some condition builders.
     # For build conditions AND, NAND, OR, NOR, XOR, XNOR.
     # @param delegated [Symbol]
-    # @return [lambda] 
+    # @return [lambda]
     def _logical_operator(delegated, *conditions)
       unless conditions.all?{|c|conditionable? c}
         raise TypeError, 'wrong object for condition'
       end
-      
+
       ->v{
         conditions.__send__(delegated) {|condition|
           _valid? condition, v
         }
       }
     end
-    
+
     class << self
       private :_logical_operator
     end
@@ -49,12 +46,12 @@ module Validation
     def AND(cond1, cond2, *conds)
       _logical_operator :all?, cond1, cond2, *conds
     end
-  
+
     # A condition builder.
     # @param cond1 [Proc, Method, #===]
     # @param cond2 [Proc, Method, #===]
     # @param conds [Proc, Method, #===]
-    # @return [lambda] 
+    # @return [lambda]
     def NAND(cond1, cond2, *conds)
       NOT AND(cond1, cond2, *conds)
     end
@@ -86,12 +83,12 @@ module Validation
     def XOR(cond1, cond2, *conds)
       _logical_operator :one?, cond1, cond2, *conds
     end
-    
+
     # A condition builder.
     # @param cond1 [Proc, Method, #===]
     # @param cond2 [Proc, Method, #===]
     # @param conds [Proc, Method, #===]
-    # @return [lambda] 
+    # @return [lambda]
     def XNOR(cond1, cond2, *conds)
       NOT XOR(cond1, cond2, *conds)
     end
@@ -103,7 +100,7 @@ module Validation
       unless conditionable? condition
         raise TypeError, 'wrong object for condition'
       end
-      
+
       ->v{! _valid?(condition, v)}
     end
 
@@ -137,7 +134,7 @@ module Validation
               }
         raise TypeError, 'only Symbol or String for message'
       end
-      
+
       ->v{
         messages.all?{|message|v.respond_to? message}
       }
@@ -148,13 +145,13 @@ module Validation
     # @param conditions [Proc, Method, #===]
     # @return [lambda]
     #   this lambda return true
-    #   if face no exception when a argment checking under all conditions 
+    #   if face no exception when a argment checking under all conditions
     def QUIET(condition, *conditions)
       conditions = [condition, *conditions]
       unless conditions.all?{|c|conditionable? c}
         raise TypeError, 'wrong object for condition'
       end
-      
+
       ->v{
         conditions.all?{|cond|
           begin
@@ -167,7 +164,7 @@ module Validation
         }
       }
     end
-    
+
     # A condition builder.
     # @param exception [Exception]
     # @param exceptions [Exception]
@@ -178,7 +175,7 @@ module Validation
       exceptions = [exception, *exceptions]
       raise ArgumentError unless conditionable? condition
       raise TypeError unless exceptions.all?{|e|e.ancestors.include? Exception}
-      
+
       ->v{
         begin
           _valid? condition, v
@@ -200,7 +197,7 @@ module Validation
     def CATCH(exception, &condition)
       raise ArgumentError unless conditionable? condition
       raise TypeError, 'not error object' unless exception.ancestors.include? Exception
-      
+
       ->v{
         begin
           _valid? condition, v
@@ -223,7 +220,7 @@ module Validation
       unless conditions.all?{|c|conditionable? c}
         raise TypeError, 'wrong object for condition'
       end
-      
+
       ->list{
         enum = (
           (list.respond_to?(:each_value) && list.each_value) or
@@ -231,7 +228,7 @@ module Validation
           (list.respond_to?(:each) && list.each) or
           return false
         )
-      
+
         conditions.all?{|cond|
           enum.all?{|v|
             _valid? cond, v
@@ -242,7 +239,7 @@ module Validation
 
     alias_method :GENERICS, :ALL
     module_function :GENERICS
-    
+
     # A condition builder.
     # @param list [#all?]
     # @param lists [#all?]
@@ -254,31 +251,31 @@ module Validation
       unless lists.all?{|l|l.respond_to? :all?}
         raise TypeError, 'list must respond #all?'
       end
-      
+
       ->v{
         lists.all?{|l|l.include? v}
       }
     end
 
     # @endgroup
-    
+
     # @group Useful Conditions
     ANYTHING = BasicObject # BasicObject.=== always passing
     BOOLEAN = ->v{v.equal?(true) || v.equal?(false)}
     STRINGABLE = OR(String, Symbol, CAN(:to_str), CAN(:to_sym))
-    
+
     module_function
 
     def ANYTHING?
       ANYTHING
     end
-    
+
     # A getter for a useful condition.
     # @return [BOOLEAN] "true or false"
     def BOOLEAN?
       BOOLEAN
     end
-    
+
     alias_method :BOOL?, :BOOLEAN?
     module_function :BOOL?
 
@@ -287,9 +284,7 @@ module Validation
     def STRINGABLE?
       STRINGABLE
     end
-    
+
     # @endgroup
-
   end
-
 end

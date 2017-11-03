@@ -3,7 +3,6 @@
 require_relative 'validatable/classmethods'
 
 module Validation
-
   # A way of defining accessor with flexible validations.
   # @example define accessor with validations
   #   class Person
@@ -12,7 +11,6 @@ module Validation
   #     attr_validator :birthday, Time
   #   end
   module Validatable
-
     private
 
     # @param [Proc, Method, #===] condition
@@ -27,7 +25,5 @@ module Validation
         condition === value
       end ? true : false
     end
-  
   end
-
 end

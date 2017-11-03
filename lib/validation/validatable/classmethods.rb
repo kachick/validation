@@ -1,9 +1,7 @@
 # coding: us-ascii
 
-module Validation; module Validatable 
-
+module Validation; module Validatable
   module ClassMethods
-
     ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
 
     # @param name [Symbol, String]
@@ -11,7 +9,7 @@ module Validation; module Validatable
     def attr_reader_with_validation(name, condition=ANYTHING)
       define_method name do
         value = instance_variable_get :"@#{name}"
-      
+
         unless _valid? condition, value
           raise InvalidReadingError,
                 "#{value.inspect} is deficient for #{name} in #{self.class}"
@@ -19,17 +17,17 @@ module Validation; module Validatable
 
         value
       end
-      
+
       nil
     end
 
     # @param name [Symbol, String]
-    # @param condition [Proc, Method, #===]  
-    def attr_writer_with_validation(name, condition=ANYTHING, &adjuster)        
+    # @param condition [Proc, Method, #===]
+    def attr_writer_with_validation(name, condition=ANYTHING, &adjuster)
       if block_given?
         adjustment = true
       end
-      
+
       define_method :"#{name}=" do |value|
         raise "can't modify frozen #{self.class}" if frozen?
 
@@ -40,7 +38,7 @@ module Validation; module Validatable
             raise InvalidAdjustingError, $!
           end
         end
-        
+
         if _valid? condition, value
           instance_variable_set :"@#{name}", value
         else
@@ -48,7 +46,7 @@ module Validation; module Validatable
             "#{value.inspect} is deficient for #{name} in #{self.class}"
         end
       end
-      
+
       nil
     end
 
@@ -61,13 +59,13 @@ module Validation; module Validatable
       unless (options.keys - ACCESSOR_OPTIONS).empty?
         raise ArgumentError, 'invalid option parameter is'
       end
-      
+
       if options[:reader_validation]
         attr_reader_with_validation name, condition
       else
         attr_reader name
       end
-      
+
       if options[:writer_validation]
         attr_writer_with_validation name, condition, &adjuster
       else
@@ -82,7 +80,5 @@ module Validation; module Validatable
       :attr_accessor_with_validation,
       :attr_validator
     )
-
-  end  
-
+  end
 end; end

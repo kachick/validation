@@ -6,7 +6,7 @@ require_relative '../lib/validation'
 
 class Person
   include Validation
-  
+
   attr_validator :name, String
   attr_validator :id, OR(nil, AND(Integer, 1..100))
 end

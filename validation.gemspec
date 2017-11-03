@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'test-unit', '>= 3.2.6', '< 4'
 
   if RUBY_ENGINE == 'rbx'
-    gem.add_dependency 'rubysl', '~> 2.1'
+    gem.add_dependency 'rubysl', '>= 2.2'
   end
 
   # common

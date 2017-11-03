@@ -1,6 +1,4 @@
 language: ruby
-sudo: required
-dist: trusty
 branches:
   only:
     - master

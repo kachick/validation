@@ -1,19 +1,6 @@
 language: ruby
-sudo: false
 branches:
   only:
     - master
 rvm:
-  - 2.4.2
-  - 2.3.5
-  - 2.2.7
-  - ruby-head
-  - rbx
-  - jruby-head
-matrix:
-  allow_failures:
-    - rvm: ruby-head
-    - rvm: rbx
-    - rvm: jruby-head
-before_install:
-  - gem install bundler
+  - rbx-3

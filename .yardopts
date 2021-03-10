@@ -1,1 +1,4 @@
 --readme README.md lib/**/**.rb
+--fail-on-warning
+--protected
+--no-private

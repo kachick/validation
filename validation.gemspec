@@ -14,9 +14,9 @@ Gem::Specification.new do |gem|
   gem.version       = Validation::VERSION.dup
 
   gem.required_ruby_version = '>= 1.9.3' # Tested in 2.2 or later version.
-  gem.add_development_dependency 'yard', '>= 0.9.9', '< 2'
-  gem.add_development_dependency 'rake', '>= 10', '< 20'
-  gem.add_development_dependency 'test-unit', '>= 3.2.6', '< 4'
+  gem.add_development_dependency 'yard', '>= 0.9.26', '< 2'
+  gem.add_development_dependency 'rake', '>= 13.0.3', '< 20'
+  gem.add_development_dependency 'test-unit', '>= 3.4.0', '< 4'
 
   # common
 

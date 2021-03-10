@@ -50,7 +50,7 @@ person.id   = 1     #=> Pass
 Requirements
 -------------
 
-* [Tested on Ruby 2.2 or later (Also 2.5 :)](http://travis-ci.org/#!/kachick/validation)
+* [Ruby 2.5+](http://travis-ci.org/#!/kachick/validation)
 
 Install
 -------

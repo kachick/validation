@@ -1,7 +1,7 @@
 validation
 ==========
 
-[![Build Status](https://secure.travis-ci.org/kachick/validation.png)](http://travis-ci.org/kachick/validation)
+![Build Status](https://github.com/kachick/validation/actions/workflows/test.yml/badge.svg?branch=main)
 [![Gem Version](https://badge.fury.io/rb/validation.png)](http://badge.fury.io/rb/validation)
 
 Description
@@ -16,11 +16,6 @@ Features
 
 Usage
 -----
-
-### How to build flexible conditions
-
-* See the [API doc](http://kachick.github.com/validation/yard/frames.html)
-
 ### An optional extension for accessor with validation.
 
 ```ruby
@@ -50,7 +45,7 @@ person.id   = 1     #=> Pass
 Requirements
 -------------
 
-* [Tested on Ruby 2.2 or later (Also 2.5 :)](http://travis-ci.org/#!/kachick/validation)
+* Ruby 2.5 or later
 
 Install
 -------
@@ -62,12 +57,7 @@ gem install validation
 Link
 ----
 
-* [Home](http://kachick.github.com/validation/)
-* [code](https://github.com/kachick/validation)
-* [API](http://kachick.github.com/validation/yard/frames.html)
-* [issues](https://github.com/kachick/validation/issues)
-* [CI](http://travis-ci.org/#!/kachick/validation)
-* [gem](https://rubygems.org/gems/validation)
+* [API documentation](https://rubydoc.info/github/kachick/validation/)
 
 License
 --------

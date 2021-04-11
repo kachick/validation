@@ -1,24 +1,18 @@
-name: Matrix Testing
-
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-
+name: Testing workflow
+on: [push, pull_request]
 jobs:
   test:
-    runs-on: ${{ matrix.os }}-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu, macos]
-        ruby: [2.5, 2.6, 2.7, '3.0', head, debug, jruby, jruby-head, truffleruby, truffleruby-head]
-    continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
+        os: [ubuntu-latest, macos-latest]
+        # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
+        ruby: [2.5, 2.6, 2.7, '3.0', head, jruby, jruby-head, truffleruby, truffleruby-head]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - run: bundle install
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: bundle exec rake

@@ -6,6 +6,6 @@ require 'irb'
 require 'irb/completion'
 require 'irb/power_assert'
 
-require_relative '../lib/declare'
+require_relative '../lib/validation'
 
 IRB.start

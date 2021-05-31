@@ -1,4 +1,5 @@
 # coding: us-ascii
+# frozen_string_literal: false
 
 require_relative 'helper'
 
@@ -182,6 +183,7 @@ class TestValidationSpecificConditions < Test::Unit::TestCase
     end
 
     sth.rescue_error = obj
+    assert_same obj, sth.rescue_error
   end
 
   def test_or

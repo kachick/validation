@@ -83,4 +83,5 @@ module Validation
         :attr_validator
       )
     end
-  end; end
+  end
+end

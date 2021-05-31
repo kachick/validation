@@ -27,7 +27,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
   class SthProc
     include Validation
 
-    attr_validator :lank, Proc.new{|n|(3..9) === n}
+    attr_validator :lank, ->n {(3..9) === n}
   end
 
   def test_Proc

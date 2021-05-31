@@ -17,14 +17,16 @@ module Validation
     # @param [Proc, Method, #===] condition
     # @param [Object] value
     def _valid?(condition, value)
-      case condition
-      when Proc
-        instance_exec(value, &condition)
-      when Method
-        condition.call(value)
-      else
-        condition === value
-      end ? true : false
+      !!(
+        case condition
+        when Proc
+          instance_exec(value, &condition)
+        when Method
+          condition.call(value)
+        else
+          condition === value
+        end
+      )
     end
   end
 end

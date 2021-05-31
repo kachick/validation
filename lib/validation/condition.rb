@@ -181,11 +181,10 @@ module Validation
       ->v {
         begin
           _valid?(condition, v)
+          false
         rescue *exceptions
           true
         rescue Exception
-          false
-        else
           false
         end
       }

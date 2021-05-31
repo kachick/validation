@@ -4,12 +4,9 @@
 module Validation
   module Validatable
     module ClassMethods
-      ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
-
-      private
-
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
+      # @return name [Symbol]
       def attr_reader_with_validation(name, condition)
         define_method(name) do
           value = instance_variable_get(:"@#{name}")
@@ -21,12 +18,11 @@ module Validation
 
           value
         end
-
-        nil
       end
 
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
+      # @return name [Symbol]
       def attr_writer_with_validation(name, condition, &adjuster)
         if adjuster
           adjustment = true
@@ -50,26 +46,31 @@ module Validation
                   "#{value.inspect} is deficient for #{name} in #{self.class}"
           end
         end
-
-        nil
       end
 
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
       # @param [Boolean] reader_validation
       # @param [Boolean] writer_validation
+      # @return names [Array<Symbol>]
       def attr_accessor_with_validation(name, condition, writer_validation: true, reader_validation: true, &adjuster)
-        if reader_validation
-          attr_reader_with_validation(name, condition)
-        else
-          attr_reader(name)
-        end
+        reader_name = (
+          if reader_validation
+            attr_reader_with_validation(name, condition)
+          else
+            attr_reader(name)
+          end
+        )
 
-        if writer_validation
-          attr_writer_with_validation(name, condition, &adjuster)
-        else
-          attr_writer(name)
-        end
+        writer_name = (
+          if writer_validation
+            attr_writer_with_validation(name, condition, &adjuster)
+          else
+            attr_writer(name)
+          end
+        )
+
+        [reader_name, writer_name]
       end
     end
   end

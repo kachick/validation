@@ -238,10 +238,20 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
       sth.like_str = obj
     end
 
+    assert_raises Validation::InvalidWritingError do
+      sth.like_str = :symbol
+    end
+
     obj.singleton_class.class_eval do
       def to_str
       end
     end
+    sth.like_str = obj
+    assert_same(obj, sth.like_str)
+
+    str = +'string'
+    sth.like_str = str
+    assert_same(str, sth.like_str)
   end
 
   def test_responsible_arg1

@@ -11,7 +11,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
       1..20
     end
 
-    attr_validator :lank, ->lank{lanks.include? lank}
+    attr_accessor_with_validation :lank, ->lank{lanks.include? lank}
   end
 
   def test_lambda
@@ -27,7 +27,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
   class SthProc
     include Validation
 
-    attr_validator :lank, ->n {(3..9) === n}
+    attr_accessor_with_validation :lank, ->n {(3..9) === n}
   end
 
   def test_Proc
@@ -43,7 +43,7 @@ class TestValidationFunctionalCondition < Test::Unit::TestCase
   class SthMethod
     include Validation
 
-    attr_validator :lank, 7.method(:<)
+    attr_accessor_with_validation :lank, 7.method(:<)
   end
 
   def test_Method

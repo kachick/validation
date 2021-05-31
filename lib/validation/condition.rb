@@ -258,26 +258,23 @@ module Validation
     # @endgroup
 
     # @group Useful Conditions
-    ANYTHING = BasicObject # BasicObject.=== always passing
     BOOLEAN = ->v { v.equal?(true) || v.equal?(false) }
     STRINGABLE = OR(String, CAN(:to_str))
 
-    def ANYTHING?
-      ANYTHING
+    def anything
+      # BasicObject.=== always passing
+      BasicObject
     end
 
     # A getter for a useful condition.
     # @return [BOOLEAN] "true or false"
-    def BOOLEAN?
+    def boolean
       BOOLEAN
     end
 
-    alias_method :BOOL?, :BOOLEAN?
-    module_function :BOOL?
-
     # A getter for a useful condition.
     # @return [STRINGABLE] check "looks string family"
-    def STRINGABLE?
+    def stringable
       STRINGABLE
     end
 

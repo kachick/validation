@@ -8,8 +8,8 @@ module Validation
   # @example define accessor with validations
   #   class Person
   #     include Validation
-  #     attr_validator :name, AND(String, /\A\w+(?: \w+)*\z/), &:strip
-  #     attr_validator :birthday, Time
+  #     attr_accessor_with_validation :name, AND(String, /\A\w+(?: \w+)*\z/), &:strip
+  #     attr_accessor_with_validation :birthday, Time
   #   end
   module Validatable
     private

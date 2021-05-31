@@ -7,7 +7,7 @@ class TestValidationAdjustmentOld < Test::Unit::TestCase
   class Sth
     include Validation
 
-    attr_validator :age, Numeric, &->arg{Integer arg}
+    attr_accessor_with_validation :age, Numeric, reader_validation: false, &->arg{Integer arg}
   end
 
   def setup
@@ -41,11 +41,11 @@ class TestValidationAdjustment < Test::Unit::TestCase
   class Sth
     include Validation
 
-    attr_validator :chomped, AND(Symbol, NOT(/\n/)), &WHEN(String, ->v{v.chomp!.to_sym})
-    attr_validator :no_reduced, Symbol, &->v{v.to_sym}
-    attr_validator :reduced, Symbol, &INJECT(->v{v.foo}, ->v{v.to_sym})
-    attr_validator :integer, Integer, &PARSE(Integer)
-    attr_validator :myobj, ->v{v.instance_of? MyClass}, &PARSE(MyClass)
+    attr_accessor_with_validation :chomped, AND(Symbol, NOT(/\n/)), &WHEN(String, ->v{v.chomp!.to_sym})
+    attr_accessor_with_validation :no_reduced, Symbol, &->v{v.to_sym}
+    attr_accessor_with_validation :reduced, Symbol, &INJECT(->v{v.foo}, ->v{v.to_sym})
+    attr_accessor_with_validation :integer, Integer, &PARSE(Integer)
+    attr_accessor_with_validation :myobj, ->v{v.instance_of? MyClass}, &PARSE(MyClass)
   end
 
   def test_WHEN

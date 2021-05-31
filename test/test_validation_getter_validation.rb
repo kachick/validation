@@ -7,8 +7,8 @@ class TestGetterValidation < Test::Unit::TestCase
   class Sth
     include Validation
 
-    attr_validator :plus_getter, /./, writer_validation: true, reader_validation: true
-    attr_validator :only_getter, /./, writer_validation: false, reader_validation: true
+    attr_accessor_with_validation :plus_getter, /./, writer_validation: true, reader_validation: true
+    attr_accessor_with_validation :only_getter, /./, writer_validation: false, reader_validation: true
   end
 
   def test_writer_validation

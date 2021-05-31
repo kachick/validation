@@ -9,27 +9,27 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
   class Sth
     include Validation
 
-    attr_validator :list_only_int, ALL(Integer)
-    attr_validator :always_passing, ANYTHING?
-    attr_validator :true_or_false, BOOL?
-    attr_validator :like_str, STRINGABLE?
-    attr_validator :has_foo, CAN(:foo)
-    attr_validator :has_foo_and_bar, CAN(:foo, :bar)
-    attr_validator :one_of_member, MEMBER_OF([1, 3])
-    attr_validator :has_ignore, AND(1..5, 3..10)
-    attr_validator :nand, NAND(1..5, 3..10)
-    attr_validator :all_pass, OR(1..5, 3..10)
-    attr_validator :catch_error, CATCH(NoMethodError){|v|v.no_name!}
-    attr_validator :rescue_error, RESCUE(NameError){|v|v.no_name!}
-    attr_validator :no_exception, QUIET(->v{v.class})
-    attr_validator :not_integer, NOT(Integer)
-    attr_validator :eq, EQ(EQUALITY_CHECKER)
-    attr_validator :equal, EQUAL(EQUALITY_CHECKER)
-    attr_validator :same, SAME(EQUALITY_CHECKER)
+    attr_accessor_with_validation :list_only_int, ALL(Integer)
+    attr_accessor_with_validation :always_passing, anything
+    attr_accessor_with_validation :true_or_false, boolean
+    attr_accessor_with_validation :like_str, stringable
+    attr_accessor_with_validation :has_foo, CAN(:foo)
+    attr_accessor_with_validation :has_foo_and_bar, CAN(:foo, :bar)
+    attr_accessor_with_validation :one_of_member, MEMBER_OF([1, 3])
+    attr_accessor_with_validation :has_ignore, AND(1..5, 3..10)
+    attr_accessor_with_validation :nand, NAND(1..5, 3..10)
+    attr_accessor_with_validation :all_pass, OR(1..5, 3..10)
+    attr_accessor_with_validation :catch_error, CATCH(NoMethodError){|v|v.no_name!}
+    attr_accessor_with_validation :rescue_error, RESCUE(NameError){|v|v.no_name!}
+    attr_accessor_with_validation :no_exception, QUIET(->v{v.class})
+    attr_accessor_with_validation :not_integer, NOT(Integer)
+    attr_accessor_with_validation :eq, EQ(EQUALITY_CHECKER)
+    attr_accessor_with_validation :equal, EQUAL(EQUALITY_CHECKER)
+    attr_accessor_with_validation :same, SAME(EQUALITY_CHECKER)
   end
 
   def test_anything
-    assert(Validation::Condition::ANYTHING === BasicObject.new)
+    assert(Validation::Condition.anything === BasicObject.new)
 
     sth = Sth.new
 

@@ -6,9 +6,11 @@ module Validation
     module ClassMethods
       ACCESSOR_OPTIONS = [:reader_validation, :writer_validation].freeze
 
+      private
+
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
-      def attr_reader_with_validation(name, condition=ANYTHING)
+      def attr_reader_with_validation(name, condition)
         define_method(name) do
           value = instance_variable_get(:"@#{name}")
 
@@ -25,7 +27,7 @@ module Validation
 
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
-      def attr_writer_with_validation(name, condition=ANYTHING, &adjuster)
+      def attr_writer_with_validation(name, condition, &adjuster)
         if adjuster
           adjustment = true
         end
@@ -54,34 +56,21 @@ module Validation
 
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
-      # @param options [Hash]
-      # @option options [Boolean] :reader_validation
-      # @option options [Boolean] :writer_validation
-      def attr_accessor_with_validation(name, condition=ANYTHING, options={ writer_validation: true }, &adjuster)
-        unless (options.keys - ACCESSOR_OPTIONS).empty?
-          raise ArgumentError, 'invalid option parameter is'
-        end
-
-        if options[:reader_validation]
+      # @param [Boolean] reader_validation
+      # @param [Boolean] writer_validation
+      def attr_accessor_with_validation(name, condition, writer_validation: true, reader_validation: true, &adjuster)
+        if reader_validation
           attr_reader_with_validation(name, condition)
         else
           attr_reader(name)
         end
 
-        if options[:writer_validation]
+        if writer_validation
           attr_writer_with_validation(name, condition, &adjuster)
         else
           attr_writer(name)
         end
       end
-
-      alias_method :attr_validator, :attr_accessor_with_validation
-      private(
-        :attr_reader_with_validation,
-        :attr_writer_with_validation,
-        :attr_accessor_with_validation,
-        :attr_validator
-      )
     end
   end
 end

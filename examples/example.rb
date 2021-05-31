@@ -8,8 +8,8 @@ require_relative '../lib/validation'
 class Person
   include Validation
 
-  attr_validator :name, String
-  attr_validator :id, OR(nil, AND(Integer, 1..100))
+  attr_accessor_with_validation :name, String
+  attr_accessor_with_validation :id, OR(nil, AND(Integer, 1..100))
 end
 
 person = Person.new

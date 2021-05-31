@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'irb'
+require 'irb/completion'
+require 'irb/power_assert'
+
+require_relative '../lib/declare'
+
+IRB.start

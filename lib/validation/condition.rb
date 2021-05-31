@@ -19,7 +19,7 @@ module Validation
     end
 
     # Condition Builders
-    # A innner method for some condition builders.
+    # A inner method for some condition builders.
     # For build conditions AND, NAND, OR, NOR, XOR, XNOR.
     # @param delegated [Symbol]
     # @return [lambda]
@@ -109,7 +109,7 @@ module Validation
     # A condition builder.
     # @param obj [#==]
     # @return [lambda]
-    #   this lambda return true if a argment match under #== method
+    #   this lambda return true if a argument match under #== method
     def EQ(obj)
       ->v { obj == v }
     end
@@ -117,7 +117,7 @@ module Validation
     # A condition builder.
     # @param obj [#equal?]
     # @return [lambda]
-    #   this lambda return true if a argment match under #equal? method
+    #   this lambda return true if a argument match under #equal? method
     def EQUAL(obj)
       ->v { obj.equal?(v) }
     end
@@ -128,7 +128,7 @@ module Validation
     # A condition builder.
     # @param messages [Symbol, String]
     # @return [lambda]
-    #   this lambda return true if a argment respond to all messages
+    #   this lambda return true if a argument respond to all messages
     def CAN(message1, *messages)
       messages = [message1, *messages]
       unless messages.all? { |s|
@@ -147,7 +147,7 @@ module Validation
     # @param conditions [Proc, Method, #===]
     # @return [lambda]
     #   this lambda return true
-    #   if face no exception when a argment checking under all conditions
+    #   if face no exception when a argument checking under all conditions
     def QUIET(condition, *conditions)
       conditions = [condition, *conditions]
       unless conditions.all? { |c| conditionable?(c) }
@@ -172,7 +172,7 @@ module Validation
     # @param exceptions [Exception]
     # @return [lambda]
     #   this lambda return true
-    #   if catch any kindly exceptions when a argment checking in a block parameter
+    #   if catch any kindly exceptions when a argument checking in a block parameter
     def RESCUE(exception, *exceptions, &condition)
       exceptions = [exception, *exceptions]
       raise ArgumentError unless conditionable?(condition)
@@ -194,7 +194,7 @@ module Validation
     # @param exception [Exception]
     # @return [lambda]
     #   this lambda return true
-    #   if catch a specific exception when a argment checking in a block parameter
+    #   if catch a specific exception when a argument checking in a block parameter
     def CATCH(exception, &condition)
       raise ArgumentError unless conditionable?(condition)
       raise TypeError, 'not error object' unless exception.ancestors.include?(Exception)

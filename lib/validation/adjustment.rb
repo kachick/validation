@@ -39,7 +39,7 @@ module Validation
       ->v { _valid?(condition, v) ? adjuster.call(v) : v }
     end
 
-    # Sequencial apply all adjusters.
+    # Sequential apply all adjusters.
     # @param adjuster1 [Proc, #to_proc]
     # @param adjuster2 [Proc, #to_proc]
     # @param adjusters [Proc, #to_proc]
@@ -56,7 +56,7 @@ module Validation
       }
     end
 
-    # Accept any parser when that resopond to parse method.
+    # Accept any parser when that respond to parse method.
     # @param parser [#parse]
     # @return [lambda]
     def PARSE(parser)

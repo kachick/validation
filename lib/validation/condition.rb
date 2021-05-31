@@ -238,9 +238,6 @@ module Validation
       }
     end
 
-    alias_method :GENERICS, :ALL
-    module_function :GENERICS
-
     # A condition builder.
     # @param list [#all?]
     # @param lists [#all?]

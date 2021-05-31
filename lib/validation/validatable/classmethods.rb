@@ -6,7 +6,7 @@ module Validation
     module ClassMethods
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
-      # @return name [Symbol]
+      # @return [Symbol]
       def attr_reader_with_validation(name, condition)
         define_method(name) do
           value = instance_variable_get(:"@#{name}")
@@ -22,7 +22,7 @@ module Validation
 
       # @param name [Symbol, String]
       # @param condition [Proc, Method, #===]
-      # @return name [Symbol]
+      # @return [Symbol]
       def attr_writer_with_validation(name, condition, &adjuster)
         if adjuster
           adjustment = true
@@ -52,7 +52,7 @@ module Validation
       # @param condition [Proc, Method, #===]
       # @param [Boolean] reader_validation
       # @param [Boolean] writer_validation
-      # @return names [Array<Symbol>]
+      # @return [Array<Symbol>]
       def attr_accessor_with_validation(name, condition, writer_validation: true, reader_validation: true, &adjuster)
         reader_name = (
           if reader_validation

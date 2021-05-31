@@ -4,7 +4,7 @@
 require_relative 'helper'
 
 class TestSignature < Test::Unit::TestCase
-  def test_attr_reader_with_validation
+  def test_attr_families_with_validation
     assertion_context = self
 
     Class.new do

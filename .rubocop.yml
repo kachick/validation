@@ -34,6 +34,8 @@ Lint:
 
 Style:
   Enabled: true
+  Exclude:
+    - 'test/**/*'
 
 Bundler:
   Enabled: true
@@ -789,8 +791,7 @@ Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: 'no_space'
 
 Naming/MethodName:
-  Enabled: true
-  EnforcedStyle: 'snake_case'
+  Enabled: false
 
 Naming/FileName:
   Enabled: true
@@ -896,12 +897,6 @@ Rubycw/Rubycw:
     - 'Steepfile'
     - 'bin/**/*'
     - 'exe/**/*'
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/DescribedClass:
-  Enabled: false
 
 Markdown:
   WarnInvalid: true

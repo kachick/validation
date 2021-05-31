@@ -9,7 +9,7 @@ repository_url = "https://github.com/kachick/#{lib_name}"
 Gem::Specification.new do |gem|
   gem.summary       = %q{Validation in Ruby objects}
   gem.description   = <<-'DESCRIPTION'
-  Validation in Ruby objects
+    Validation in Ruby objects
   DESCRIPTION
   gem.homepage      = repository_url
   gem.license       = 'MIT'

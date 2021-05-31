@@ -1,4 +1,5 @@
 # coding: us-ascii
+# frozen_string_literal: true
 
 module Validation
   module Adjustment
@@ -13,7 +14,7 @@ module Validation
       when Proc
         object.arity == 1
       else
-        if object.respond_to? :to_proc
+        if object.respond_to?(:to_proc)
           object.to_proc.arity == 1
         else
           false
@@ -27,15 +28,15 @@ module Validation
     # @param adjuster [Proc, #to_proc]
     # @return [lambda]
     def WHEN(condition, adjuster)
-      unless Validation.conditionable? condition
+      unless Validation.conditionable?(condition)
         raise TypeError, 'wrong object for condition'
       end
 
-      unless Validation.adjustable? adjuster
+      unless Validation.adjustable?(adjuster)
         raise TypeError, 'wrong object for adjuster'
       end
 
-      ->v{_valid?(condition, v) ? adjuster.call(v) : v}
+      ->v { _valid?(condition, v) ? adjuster.call(v) : v }
     end
 
     # Sequencial apply all adjusters.
@@ -46,12 +47,12 @@ module Validation
     def INJECT(adjuster1, adjuster2, *adjusters)
       adjusters = [adjuster1, adjuster2, *adjusters]
 
-      unless adjusters.all?{|f|adjustable? f}
+      unless adjusters.all? { |f| adjustable?(f) }
         raise TypeError, 'wrong object for adjuster'
       end
 
-      ->v{
-        adjusters.reduce(v){|ret, adjuster|adjuster.call ret}
+      ->v {
+        adjusters.reduce(v) { |ret, adjuster| adjuster.call(ret) }
       }
     end
 
@@ -59,21 +60,21 @@ module Validation
     # @param parser [#parse]
     # @return [lambda]
     def PARSE(parser)
-      if !::Integer.equal?(parser) and !parser.respond_to?(:parse)
+      if !::Integer.equal?(parser) && !parser.respond_to?(:parse)
         raise TypeError, 'wrong object for parser'
       end
 
-      ->v{
-        if ::Integer.equal? parser
-          ::Kernel.Integer v
+      ->v {
+        if ::Integer.equal?(parser)
+          ::Kernel.Integer(v)
         else
           parser.parse(
             case v
             when String
               v
-            when ->_{v.respond_to? :to_str}
+            when ->_ { v.respond_to?(:to_str) }
               v.to_str
-            when ->_{v.respond_to? :read}
+            when ->_ { v.respond_to?(:read) }
               v.read
             else
               raise TypeError, 'wrong object for parsing source'

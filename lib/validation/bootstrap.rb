@@ -1,4 +1,5 @@
 # coding: us-ascii
+# frozen_string_literal: true
 
 require_relative 'version'
 require_relative 'errors'

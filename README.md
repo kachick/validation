@@ -1,22 +1,19 @@
-validation
-==========
+# validation
 
-![Build Status](https://github.com/kachick/validation/actions/workflows/test.yml/badge.svg?branch=main)
+![Build Status](https://github.com/kachick/validation/actions/workflows/test_behaviors.yml/badge.svg?branch=main)
 [![Gem Version](https://badge.fury.io/rb/validation.png)](http://badge.fury.io/rb/validation)
-
-Description
------------
 
 Validations with Ruby objects.
 
-Features
---------
+## Usage
 
-* Pure Ruby :)
+Require Ruby 2.5 or later
 
-Usage
------
-### An optional extension for accessor with validation.
+Add below code into your Gemfile
+
+```ruby
+gem 'validation', '>= 0.2.0', '< 0.3.0'
+```
 
 ```ruby
 require 'validation'
@@ -39,29 +36,9 @@ person.id   = 1     #=> Pass
 
 * [striuct](https://github.com/kachick/striuct)
 * [optionalargument](https://github.com/kachick/optionalargument)
-* [io-nosey](https://github.com/kachick/io-nosey)
 * [family](https://github.com/kachick/family)
 
-Requirements
--------------
+## Links
 
-* Ruby 2.5 or later
-
-Install
--------
-
-```bash
-gem install validation
-```
-
-Link
-----
-
-* [API documentation](https://rubydoc.info/github/kachick/validation/)
-
-License
---------
-
-The MIT X11 License  
-Copyright (c) 2011-2012 Kenichi Kamiya  
-See MIT-LICENSE for further details.
+* [Repository](https://github.com/kachick/validation)
+* [API documents](https://kachick.github.io/validation)

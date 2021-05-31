@@ -1,14 +1,20 @@
-name: Testing workflow
-on: [push, pull_request]
+# https://docs.github.com/ja/actions/reference/workflow-syntax-for-github-actions
+name: Lint
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+  pull_request: null # This enables to run on each PRs
 jobs:
-  test:
+  rubocop:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
         # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
-        # Don't include `truffleruby` and `truffleruby-head` https://github.com/kachick/validation/runs/2317029160?check_suite_focus=true
-        ruby: [2.5, 2.6, 2.7, '3.0', head, jruby, jruby-head]
+        ruby: ['3.0']
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
@@ -16,4 +22,4 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle exec rake
+    - run: bundle exec rake rubocop

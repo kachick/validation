@@ -202,8 +202,8 @@ module Validation
       ->v {
         begin
           _valid?(condition, v)
-        rescue Exception
-          $!.instance_of?(exception)
+        rescue Exception => err
+          err.instance_of?(exception)
         else
           false
         end

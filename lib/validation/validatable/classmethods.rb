@@ -36,8 +36,8 @@ module Validation
           if adjustment
             begin
               value = instance_exec(value, &adjuster)
-            rescue Exception
-              raise InvalidAdjustingError, $!
+            rescue Exception => err
+              raise InvalidAdjustingError, err
             end
           end
 

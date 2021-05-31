@@ -9,7 +9,12 @@ module Validation
       # @return [Symbol]
       def attr_reader_with_validation(name, condition)
         define_method(name) do
-          value = instance_variable_get(:"@#{name}")
+          ivar = :"@#{name}"
+          unless instance_variable_defined?(ivar)
+            instance_variable_set(ivar, nil)
+          end
+
+          value = instance_variable_get(ivar)
 
           unless _valid?(condition, value)
             raise InvalidReadingError,

@@ -733,6 +733,16 @@ Style/YodaCondition:
 Style/ZeroLengthPredicate:
   Enabled: true
 
+Style/InPatternThen:
+  Enabled: true
+
+Style/QuotedSymbols:
+  Enabled: true
+  EnforcedStyle: 'single_quotes'
+
+Style/MultilineInPatternThen:
+  Enabled: true
+
 Layout/TrailingEmptyLines:
   Enabled: true
 
@@ -789,6 +799,15 @@ Layout/EmptyLineBetweenDefs:
 Layout/SpaceAroundEqualsInParameterDefault:
   Enabled: true
   EnforcedStyle: 'no_space'
+
+Layout/SpaceAroundKeyword:
+  Enabled: true
+
+Layout/ArgumentAlignment:
+  Enabled: true
+
+Layout/CaseIndentation:
+  Enabled: true
 
 Naming/MethodName:
   Enabled: false
@@ -888,6 +907,9 @@ Lint/ConstantDefinitionInBlock:
 
 Lint/ConstantResolution:
   Enabled: false
+
+Lint/EmptyInPattern:
+  Enabled: true
 
 Rubycw/Rubycw:
   Enabled: true

@@ -7,12 +7,12 @@ Validations with Ruby objects.
 
 ## Usage
 
-Require Ruby 2.5 or later
+Require Ruby 2.6 or later
 
 Add below code into your Gemfile
 
 ```ruby
-gem 'validation', '>= 0.2.1', '< 0.3.0'
+gem 'validation', '>= 0.2.2', '< 0.3.0'
 ```
 
 ### Overview

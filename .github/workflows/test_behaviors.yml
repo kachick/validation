@@ -4,33 +4,23 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - 'benchmark/**'
-      - 'bin/**'
-      - 'scripts/**'
-      - 'sig/**'
-      - 'Steepfile'
-      - '**.md'
-      - '*LICENSE*'
-      - 'logo.png'
-      - '.yardopts'
-      - '.editorconfig'
-      - '.rubocop.yml'
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'spec/**'
+      - '.rspec'
+      - '**.gemspec'
+      - 'Gemfile'
+      - 'Rakefile'
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - 'benchmark/**'
-      - 'bin/**'
-      - 'scripts/**'
-      - 'sig/**'
-      - 'Steepfile'
-      - '**.md'
-      - '*LICENSE*'
-      - 'logo.png'
-      - '.yardopts'
-      - '.editorconfig'
-      - '.rubocop.yml'
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'spec/**'
+      - '.rspec'
+      - '**.gemspec'
+      - 'Gemfile'
+      - 'Rakefile'
 jobs:
   test_behaviors:
     strategy:
@@ -38,7 +28,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
-        ruby: [2.5, 2.6, 2.7, '3.0', head]
+        ruby: [2.6, 2.7, '3.0', head]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2

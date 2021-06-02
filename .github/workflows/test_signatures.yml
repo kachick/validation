@@ -1,27 +1,31 @@
-name: Signature - YARD
+name: Signature
 on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - 'benchmark/**'
-      - 'bin/**'
-      - 'scripts/**'
-      - 'test/**'
-      - 'spec/**'
-      - 'logo.png'
-      - '.rubocop.yml'
+    paths:
+      - 'lib/**'
+      - 'sig/**'
+      - 'exe/**'
+      - '**.md'
+      - '**.txt'
+      - '**.gemspec'
+      - 'Gemfile'
+      - 'Steepfile'
+      - '.yardopts'
+      - 'Rakefile'
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - 'benchmark/**'
-      - 'bin/**'
-      - 'scripts/**'
-      - 'test/**'
-      - 'spec/**'
-      - 'logo.png'
-      - '.rubocop.yml'
+    paths:
+      - 'lib/**'
+      - 'sig/**'
+      - 'exe/**'
+      - '**.md'
+      - '**.txt'
+      - '**.gemspec'
+      - 'Gemfile'
+      - 'Steepfile'
+      - '.yardopts'
+      - 'Rakefile'
 jobs:
   validate_signatures:
     strategy:

@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
     'bug_tracker_uri'   => "#{repository_url}/issues"
   }
 
-  gem.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
+  gem.required_ruby_version = Gem::Requirement.new('>= 2.6.0')
 
   # common
 

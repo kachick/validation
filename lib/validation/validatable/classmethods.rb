@@ -5,9 +5,9 @@ module Validation
   module Validatable
     module ClassMethods
       # @param name [Symbol, String]
-      # @param condition [Proc, Method, #===]
+      # @param pattern [Proc, Method, #===]
       # @return [Symbol]
-      def attr_reader_with_validation(name, condition)
+      def attr_reader_with_validation(name, pattern)
         define_method(name) do
           ivar = :"@#{name}"
           unless instance_variable_defined?(ivar)
@@ -16,7 +16,7 @@ module Validation
 
           value = instance_variable_get(ivar)
 
-          unless _valid?(condition, value)
+          unless _valid?(pattern, value)
             raise InvalidReadingError,
                   "#{value.inspect} is deficient for #{name} in #{self.class}"
           end
@@ -26,9 +26,9 @@ module Validation
       end
 
       # @param name [Symbol, String]
-      # @param condition [Proc, Method, #===]
+      # @param pattern [Proc, Method, #===]
       # @return [Symbol]
-      def attr_writer_with_validation(name, condition, &adjuster)
+      def attr_writer_with_validation(name, pattern, &adjuster)
         if adjuster
           adjustment = true
         end
@@ -44,7 +44,7 @@ module Validation
             end
           end
 
-          if _valid?(condition, value)
+          if _valid?(pattern, value)
             instance_variable_set(:"@#{name}", value)
           else
             raise InvalidWritingError,
@@ -54,14 +54,14 @@ module Validation
       end
 
       # @param name [Symbol, String]
-      # @param condition [Proc, Method, #===]
+      # @param pattern [Proc, Method, #===]
       # @param [Boolean] reader_validation
       # @param [Boolean] writer_validation
       # @return [Array<Symbol>]
-      def attr_accessor_with_validation(name, condition, writer_validation: true, reader_validation: true, &adjuster)
+      def attr_accessor_with_validation(name, pattern, writer_validation: true, reader_validation: true, &adjuster)
         reader_name = (
           if reader_validation
-            attr_reader_with_validation(name, condition)
+            attr_reader_with_validation(name, pattern)
           else
             attr_reader(name)
           end
@@ -69,7 +69,7 @@ module Validation
 
         writer_name = (
           if writer_validation
-            attr_writer_with_validation(name, condition, &adjuster)
+            attr_writer_with_validation(name, pattern, &adjuster)
           else
             attr_writer(name)
           end

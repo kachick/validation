@@ -23,20 +23,20 @@ module Validation
     end
 
     # Adjuster Builders
-    # Apply adjuster when passed condition.
-    # @param condition [Proc, Method, #===]
+    # Apply adjuster when passed pattern.
+    # @param pattern [Proc, Method, #===]
     # @param adjuster [Proc, #to_proc]
     # @return [lambda]
-    def WHEN(condition, adjuster)
-      unless Validation.conditionable?(condition)
-        raise TypeError, 'wrong object for condition'
+    def WHEN(pattern, adjuster)
+      unless Eqq.valid?(pattern)
+        raise TypeError, 'wrong object for pattern'
       end
 
       unless Validation.adjustable?(adjuster)
         raise TypeError, 'wrong object for adjuster'
       end
 
-      ->v { _valid?(condition, v) ? adjuster.call(v) : v }
+      ->v { _valid?(pattern, v) ? adjuster.call(v) : v }
     end
 
     # Sequential apply all adjusters.

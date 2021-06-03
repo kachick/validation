@@ -12,7 +12,7 @@ Require Ruby 2.6 or later
 Add below code into your Gemfile
 
 ```ruby
-gem 'validation', '>= 0.2.2', '< 0.3.0'
+gem 'validation', '>= 0.3.0', '< 0.4.0'
 ```
 
 ### Overview
@@ -46,6 +46,8 @@ person.age = 11.9 #=> Error ( `11.9` adjusting to `11` with `(11.9).to_i`, but i
 person.age = 12.9
 person.age #=> 12
 ```
+
+The pattern builder DSL is just using [eqq](https://github.com/kachick/eqq)
 
 ## Links
 

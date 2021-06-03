@@ -14,7 +14,7 @@ At first, you should install development dependencies
 $ git clone git@github.com:kachick/validation.git
 $ cd ./validation
 $ ./bin/setup
-# Installed!
+Installed!
 ```
 
 ## Feel the latest version with REPL

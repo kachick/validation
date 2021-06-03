@@ -7,7 +7,7 @@ module Validation
 
     def included(mod)
       mod.module_eval do
-        extend(Condition)
+        extend(Eqq::Buildable)
         extend(Adjustment)
         extend(Validatable::ClassMethods)
         include(Validatable)

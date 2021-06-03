@@ -9,28 +9,22 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
   class Sth
     include Validation
 
-    attr_accessor_with_validation :list_only_int, ALL(Integer)
-    attr_accessor_with_validation :always_passing, anything
-    attr_accessor_with_validation :true_or_false, boolean
-    attr_accessor_with_validation :like_str, stringable
+    attr_accessor_with_validation :list_only_int, SEND(:all?, Integer)
+    attr_accessor_with_validation :always_passing, ANYTHING()
+    attr_accessor_with_validation :true_or_false, BOOLEAN()
     attr_accessor_with_validation :has_foo, CAN(:foo)
     attr_accessor_with_validation :has_foo_and_bar, CAN(:foo, :bar)
-    attr_accessor_with_validation :one_of_member, MEMBER_OF([1, 3])
     attr_accessor_with_validation :has_ignore, AND(1..5, 3..10)
     attr_accessor_with_validation :nand, NAND(1..5, 3..10)
     attr_accessor_with_validation :all_pass, OR(1..5, 3..10)
-    attr_accessor_with_validation :catch_error, CATCH(NoMethodError){|v|v.no_name!}
-    attr_accessor_with_validation :rescue_error, RESCUE(NameError){|v|v.no_name!}
+    attr_accessor_with_validation :rescue_error, RESCUE(NameError, ->v{v.no_name!})
     attr_accessor_with_validation :no_exception, QUIET(->v{v.class})
     attr_accessor_with_validation :not_integer, NOT(Integer)
     attr_accessor_with_validation :eq, EQ(EQUALITY_CHECKER)
-    attr_accessor_with_validation :equal, EQUAL(EQUALITY_CHECKER)
     attr_accessor_with_validation :same, SAME(EQUALITY_CHECKER)
   end
 
   def test_anything
-    assert(Validation::Condition.anything === BasicObject.new)
-
     sth = Sth.new
 
     obj = BasicObject.new
@@ -67,37 +61,6 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
 
     assert_raises Validation::InvalidWritingError do
       sth.no_exception = obj
-    end
-  end
-
-  def test_catch
-    sth = Sth.new
-
-    obj = Object.new
-
-    sth.catch_error = obj
-    assert_same obj, sth.catch_error
-    sth.catch_error = false
-
-    obj.singleton_class.class_eval do
-      def no_name!
-      end
-    end
-
-    assert_raises Validation::InvalidWritingError do
-      sth.catch_error = obj
-    end
-
-    obj.singleton_class.class_eval do
-      remove_method :no_name!
-
-      def no_name!
-        raise NameError
-      end
-    end
-
-    assert_raises Validation::InvalidWritingError do
-      sth.catch_error = obj
     end
   end
 
@@ -179,17 +142,6 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
     assert_equal [], sth.nand
   end
 
-  def test_member_of
-    sth = Sth.new
-
-    assert_raises Validation::InvalidWritingError do
-      sth.one_of_member = 4
-    end
-
-    sth.one_of_member = 3
-    assert_equal 3, sth.one_of_member
-  end
-
   def test_all
     sth = Sth.new
 
@@ -214,30 +166,6 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
     assert_equal true, sth.true_or_false
     sth.true_or_false = false
     assert_equal false, sth.true_or_false
-  end
-
-  def test_STRINGABLE?
-    sth = Sth.new
-    obj = Object.new
-
-    assert_raises Validation::InvalidWritingError do
-      sth.like_str = obj
-    end
-
-    assert_raises Validation::InvalidWritingError do
-      sth.like_str = :symbol
-    end
-
-    obj.singleton_class.class_eval do
-      def to_str
-      end
-    end
-    sth.like_str = obj
-    assert_same(obj, sth.like_str)
-
-    str = +'string'
-    sth.like_str = str
-    assert_same(str, sth.like_str)
   end
 
   def test_responsible_arg1
@@ -303,17 +231,6 @@ class TestValidationSpecialConditions < Test::Unit::TestCase
 
     sth.eq = EQUALITY_CHECKER.dup
     assert_equal EQUALITY_CHECKER, sth.eq
-  end
-
-  def test_equal
-    sth = Sth.new
-
-    assert_raises Validation::InvalidWritingError do
-      sth.equal = EQUALITY_CHECKER.dup
-    end
-
-    sth.equal = EQUALITY_CHECKER
-    assert_same EQUALITY_CHECKER, sth.equal
   end
 
   def test_same

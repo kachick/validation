@@ -14,17 +14,17 @@ module Validation
   module Validatable
     private
 
-    # @param [Proc, Method, #===] condition
+    # @param [Proc, Method, #===] pattern
     # @param [Object] value
-    def _valid?(condition, value)
+    def _valid?(pattern, value)
       !!(
-        case condition
+        case pattern
         when Proc
-          instance_exec(value, &condition)
+          instance_exec(value, &pattern)
         when Method
-          condition.call(value)
+          pattern.call(value)
         else
-          condition === value
+          pattern === value
         end
       )
     end

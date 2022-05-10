@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - '.github/workflows/test_behaviors.yml'
       - 'lib/**'
       - 'test/**'
       - 'spec/**'
@@ -14,6 +15,7 @@ on:
       - 'Rakefile'
   pull_request:
     paths:
+      - '.github/workflows/test_behaviors.yml'
       - 'lib/**'
       - 'test/**'
       - 'spec/**'
@@ -28,7 +30,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
-        ruby: [2.6, 2.7, '3.0', head]
+        ruby: [2.7, '3.0', 3.1, head]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
@@ -39,3 +41,5 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: bundle exec rake test_behaviors
+      env:
+        BUNDLE_WITHOUT: development

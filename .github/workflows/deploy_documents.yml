@@ -3,6 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
+      - '.github/workflows/deploy_documents.yml'
       - 'lib/**'
       - '**.md'
       - '**.txt'

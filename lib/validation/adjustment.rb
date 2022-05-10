@@ -28,7 +28,7 @@ module Validation
     # @param adjuster [Proc, #to_proc]
     # @return [lambda]
     def WHEN(pattern, adjuster)
-      unless Eqq.valid?(pattern)
+      unless Eqq.pattern?(pattern)
         raise TypeError, 'wrong object for pattern'
       end
 

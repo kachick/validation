@@ -10,6 +10,9 @@ require 'irb'
 require 'power_assert/colorize'
 require 'irb/power_assert'
 
+Warning[:deprecated] = true
+Warning[:experimental] = true
+
 Warning.process do |_warning|
   :raise
 end

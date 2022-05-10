@@ -12,7 +12,7 @@ Require Ruby 2.7 or later
 Add below code into your Gemfile
 
 ```ruby
-gem 'validation', '>= 0.3.0', '< 0.4.0'
+gem 'validation', '~> 0.4.0'
 ```
 
 ### Overview

@@ -28,7 +28,3 @@ task validate_signatures: [:test_yard]
 task :test_yard do
   sh "bundle exec yard --fail-on-warning #{'--no-progress' if ENV['CI']}"
 end
-
-task :yard do
-  sh 'bundle exec yard --fail-on-warning'
-end

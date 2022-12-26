@@ -5,19 +5,12 @@
 # validation
 
 ![Build Status](https://github.com/kachick/validation/actions/workflows/test_behaviors.yml/badge.svg?branch=main)
-[![Gem Version](https://badge.fury.io/rb/validation.svg)](http://badge.fury.io/rb/validation)
 
 Validations with Ruby objects.
 
 ## Usage
 
 Require Ruby 2.7 or later
-
-Add below code into your Gemfile
-
-```ruby
-gem 'validation', '~> 0.4.1'
-```
 
 ### Overview
 

@@ -1,3 +1,7 @@
+- _**This repository is archived**_
+- _**No longer maintained**_
+- _**All versions have been yanked from https://rubygems.org for releasing valuable namespace for others**_
+
 # validation
 
 ![Build Status](https://github.com/kachick/validation/actions/workflows/test_behaviors.yml/badge.svg?branch=main)

@@ -1,7 +1,7 @@
 # validation
 
 ![Build Status](https://github.com/kachick/validation/actions/workflows/test_behaviors.yml/badge.svg?branch=main)
-[![Gem Version](https://badge.fury.io/rb/validation.png)](http://badge.fury.io/rb/validation)
+[![Gem Version](https://badge.fury.io/rb/validation.svg)](http://badge.fury.io/rb/validation)
 
 Validations with Ruby objects.
 
